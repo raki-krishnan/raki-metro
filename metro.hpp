@@ -1,15 +1,12 @@
 
-using namespace std;
 #include <vector>
 #include <unordered_map>
 
+using namespace std;
+
 class Stop{
 
-    Stop(){
-        index = 0;
-        northsouth = 0;
-        eastwest = 0;
-    }
+
     Stop(size_t index_in, int ns_in, int ew_in, vector<Stop*> & adj_in): 
     index(index_in), northsouth(ns_in), eastwest(ew_in), adjacent_stops(adj_in) {}
 
@@ -31,6 +28,10 @@ enum class Train{
 
 class Metro{
     public:
+    void stops(){
+        vector<Stop*> vec;
+        Stop shady_grove(size_t(0), 10, 10, vec);
+    };
 
     unordered_map<Stop, Train> stop_map;
     vector<Stop> red_line;
