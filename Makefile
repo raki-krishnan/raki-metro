@@ -1,6 +1,7 @@
-CC = g++
+CXX = g++
 EXECUTABLE = metro
 SRCS = $(shell find . -name "*.hpp")
+CXXFLAGS = -std=c++17 -Wconversion -Wall -Werror -Wextra -pedantic
 
 
 .PHONY: all
@@ -15,4 +16,4 @@ run: $(EXECUTABLE)
 	./$(EXECUTABLE)
 
 $(EXECUTABLE) : $(SRCS)
-	$(CC) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ $^
