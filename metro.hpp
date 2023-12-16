@@ -751,8 +751,8 @@ class Metro{
 
         //Cheverly
         Stop cheverly("Cheverly", size_t(5), cheverly_adjacents);
-        pair<string, int> a19 = make_pair("Cheverly", 2);
-        pair<string, int> a20 = make_pair("Deanwood", 2);
+        pair<string, int> a19 = make_pair("Cheverly", 3);
+        pair<string, int> a20 = make_pair("Deanwood", 3);
         deanwood.adjacent_stops.push_back(a19); 
         cheverly.adjacent_stops.push_back(a20);
         stop_map["Cheverly"] = cheverly;
@@ -760,8 +760,8 @@ class Metro{
 
         //Landover
         Stop landover("Landover", size_t(6), landover_adjacents);
-        pair<string, int> a21 = make_pair("Cheverly", 2);
-        pair<string, int> a22 = make_pair("Landover", 2);
+        pair<string, int> a21 = make_pair("Cheverly", 3);
+        pair<string, int> a22 = make_pair("Landover", 3);
         landover.adjacent_stops.push_back(a21); 
         cheverly.adjacent_stops.push_back(a22);
         stop_map["Landover"] = landover;
@@ -794,12 +794,142 @@ class Metro{
         //----------------------------Orange Line stops end------------------------------//
 
 
+        //-------------------------------Silver Line stops-------------------------------//
+        vector<pair<string, int> > ashburn_adjacents; 
+        vector<pair<string, int> > loudon_gateway_adjacents;
+        vector<pair<string, int> > iad_adjacents; 
+        vector<pair<string, int> > innovation_center_adjacents;
+        vector<pair<string, int> > herndon_adjacents;
+        vector<pair<string, int> > reston_town_center_adjacents;
+        vector<pair<string, int> > wiehle_reston_east_adjacents;
+        vector<pair<string, int> > spring_hill_adjacents;
+        vector<pair<string, int> > greensboro_adjacents;
+        vector<pair<string, int> > tysons_adjacents;
+        vector<pair<string, int> > mclean_adjacents;
 
+
+
+        //Ashburn
+        Stop ashburn("Ashburn", size_t(0), ashburn_adjacents);
+        stop_map["Ashburn"] = ashburn;
+        train_map["Ashburn"] = Train::SILVER;
+
+        //Loudon Gateway
+        Stop loudon_gateway("Loudon Gateway", size_t(1), loudon_gateway_adjacents);
+        pair<string, int> b1 = make_pair("Loudon Gateway", 3);
+        pair<string, int> b2 = make_pair("Ashburn", 3);
+        ashburn.adjacent_stops.push_back(b1);
+        loudon_gateway.adjacent_stops.push_back(b2);
+        stop_map["Loudon Gateway"] = loudon_gateway;
+        train_map["Loudon Gateway"] = Train::SILVER;
+
+        //IAD
+        Stop iad("IAD", size_t(2), iad_adjacents);
+        pair<string, int> b3 = make_pair("Loudon Gateway", 3);
+        pair<string, int> b4 = make_pair("IAD", 3);
+        iad.adjacent_stops.push_back(b3);
+        loudon_gateway.adjacent_stops.push_back(b4);
+        stop_map["IAD"] = iad;
+        train_map["IAD"] = Train::SILVER;
+
+        //Innovation Center
+        Stop innovation_center("Innovation Center", size_t(3), innovation_center_adjacents);
+        pair<string, int> b5 = make_pair("Innovation Center", 3);
+        pair<string, int> b6 = make_pair("IAD", 3);
+        iad.adjacent_stops.push_back(b5);
+        innovation_center.adjacent_stops.push_back(b6);
+        stop_map["Innovation Center"] = innovation_center;
+        train_map["Innovation Center"] = Train::SILVER;
+
+
+        //Herndon
+        Stop herndon("Herndon", size_t(4), herndon_adjacents);
+        pair<string, int> b7 = make_pair("Innovation Center", 3);
+        pair<string, int> b8 = make_pair("Herndon", 3);
+        herndon.adjacent_stops.push_back(b7);
+        innovation_center.adjacent_stops.push_back(b8);
+        stop_map["Herndon"] = herndon;
+        train_map["Herndon"] = Train::SILVER;
+
+        //Reston Town Center
+        Stop reston_town_center("Reston Town Center", size_t(5), reston_town_center_adjacents);
+        pair<string, int> b9 = make_pair("Reston Town Center", 3);
+        pair<string, int> b10 = make_pair("Herndon", 3);
+        herndon.adjacent_stops.push_back(b9);
+        reston_town_center.adjacent_stops.push_back(b10);
+        stop_map["Reston Town Center"] = reston_town_center;
+        train_map["Reston Town Center"] = Train::SILVER;
+
+
+        //Wiehle-Reston East
+        Stop wiehle_reston_east("Wiehle-Reston East", size_t(6), wiehle_reston_east_adjacents);
+        pair<string, int> b11 = make_pair("Reston Town Center", 2);
+        pair<string, int> b12 = make_pair("Wiehle-Reston East", 2);
+        wiehle_reston_east.adjacent_stops.push_back(b11);
+        reston_town_center.adjacent_stops.push_back(b12);
+        stop_map["Wiehle-Reston East"] = wiehle_reston_east;
+        train_map["Wiehle-Reston East"] = Train::SILVER;
+
+        //Spring Hill
+        Stop spring_hill("Spring Hill", size_t(7), spring_hill_adjacents);
+        pair<string, int> b13 = make_pair("Spring Hill", 2);
+        pair<string, int> b14 = make_pair("Wiehle-Reston East", 2);
+        wiehle_reston_east.adjacent_stops.push_back(b13);
+        spring_hill.adjacent_stops.push_back(b14);
+        stop_map["Spring Hill"] = spring_hill;
+        train_map["Spring Hill"] = Train::SILVER;
+
+
+        //Greensboro
+        Stop greensboro("Greensboro", size_t(8), greensboro_adjacents);
+        pair<string, int> b15 = make_pair("Spring Hill", 3);
+        pair<string, int> b16 = make_pair("Greensboro", 3);
+        greensboro.adjacent_stops.push_back(b15);
+        spring_hill.adjacent_stops.push_back(b16);
+        stop_map["Greensboro"] = greensboro;
+        train_map["Greensboro"] = Train::SILVER;
+
+        //Tysons
+        Stop tysons("Tysons", size_t(9), tysons_adjacents);
+        pair<string, int> b17 = make_pair("Tysons", 2);
+        pair<string, int> b18 = make_pair("Greensboro", 2);
+        greensboro.adjacent_stops.push_back(b17);
+        tysons.adjacent_stops.push_back(b18);
+        stop_map["Tysons"] = tysons;
+        train_map["Tysons"] = Train::SILVER;
+
+        //McLean
+        Stop mclean("McLean", size_t(10), mclean_adjacents);
+        pair<string, int> b19 = make_pair("Tysons", 2);
+        pair<string, int> b20 = make_pair("McLean", 2);
+        mclean.adjacent_stops.push_back(b19);
+        tysons.adjacent_stops.push_back(b20);
+        pair<string, int> b21 = make_pair("McLean", 4);
+        pair<string, int> b22 = make_pair("East Falls Church", 4);
+        mclean.adjacent_stops.push_back(b22);
+        silverorange_line[0].adjacent_stops.push_back(b21);
+        stop_map["McLean"] = mclean;
+        train_map["McLean"] = Train::SILVER;
+
+
+        silver_line.push_back(ashburn);
+        silver_line.push_back(loudon_gateway);
+        silver_line.push_back(iad);
+        silver_line.push_back(innovation_center);
+        silver_line.push_back(herndon);
+        silver_line.push_back(reston_town_center);
+        silver_line.push_back(wiehle_reston_east);
+        silver_line.push_back(spring_hill);
+        silver_line.push_back(greensboro);
+        silver_line.push_back(tysons);
+        silver_line.push_back(mclean);
+
+
+        //------------------------------Silver Line stops end-----------------------------//
 
 
 
         
-
 
     };
 
