@@ -22,7 +22,7 @@ class Stop{
     //djikstra variables
     bool finalized = false;
     string parent = "none";
-    int dist_from_start = std::numeric_limits<int>::infinity();
+    double dist_from_start = std::numeric_limits<double>::infinity();
 };
 
 struct StopComp{
@@ -119,7 +119,7 @@ class Metro{
         vector<pair<string, int> > friendship_heights_adjacents;
         Stop friendship_heights("Friendship Heights", size_t(7), friendship_heights_adjacents);
         pair<string, int> p111 = make_pair("Bethesda", 2);
-        pair<string, int> p12 = make_pair("friendship Heights", 2);
+        pair<string, int> p12 = make_pair("Friendship Heights", 2);
         friendship_heights.adjacent_stops.push_back(p111);
         bethesda.adjacent_stops.push_back(p12);
 
@@ -1152,6 +1152,7 @@ class Metro{
 
     for (auto& stop: red_line){
         master_list.push_back(stop);
+        
     }
     for (auto& stop: blue_line){
         master_list.push_back(stop);
