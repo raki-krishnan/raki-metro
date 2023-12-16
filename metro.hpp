@@ -2,6 +2,7 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+#include <limits>
 
 using namespace std;
 
@@ -21,7 +22,22 @@ class Stop{
     //djikstra variables
     bool finalized = false;
     string parent = "none";
-    int dist_from_start = 0;
+    int dist_from_start = std::numeric_limits<int>::infinity();
+};
+
+struct StopComp{
+    public:
+    // StopComp(Stop stop1_in, Stop stop2_in): stop1(stop1_in), stop2(stop2_in){}
+    bool operator()(Stop stop1, Stop stop2) const {
+        //we want this to be a min pq
+        if (stop1.dist_from_start > stop2.dist_from_start){
+            return true;
+        }
+        return false;
+    }
+
+    // Stop stop1;
+    // Stop stop2;
 };
 
 
@@ -1129,6 +1145,48 @@ class Metro{
         multi_line.push_back(fort_totten);
         multi_line.push_back(lenfant_plaza);
 
+    //--------------------------------Multi Line stops-------------------------------------//
+
+
+    //------------------------------Master List Creation-----------------------------------//
+
+    for (auto& stop: red_line){
+        master_list.push_back(stop);
+    }
+    for (auto& stop: blue_line){
+        master_list.push_back(stop);
+    }
+    for (auto& stop: yellow_line){
+        master_list.push_back(stop);
+    }
+    for (auto& stop: silver_line){
+        master_list.push_back(stop);
+    }
+    for (auto& stop: orange_line){
+        master_list.push_back(stop);
+    }
+    for (auto& stop: green_line){
+        master_list.push_back(stop);
+    }
+    for (auto& stop: bluesilverorange_line){
+        master_list.push_back(stop);
+    }
+    for (auto& stop: bluesilver_line){
+        master_list.push_back(stop);
+    }
+    for (auto& stop: blueyellow_line){
+        master_list.push_back(stop);
+    }
+    for (auto& stop: silverorange_line){
+        master_list.push_back(stop);
+    }
+    for (auto& stop: yellowgreen_line){
+        master_list.push_back(stop);
+    }
+    for (auto& stop: multi_line){
+        master_list.push_back(stop);
+    }
+
     };
 
 
@@ -1147,18 +1205,8 @@ class Metro{
     vector<Stop> silverorange_line;
     vector<Stop> yellowgreen_line;
 
+    vector<Stop> master_list;
+
 }; //end metro class
 
 
-/*How are we implementing stop map?
-Each stop is mapped to a Train
-
-    Train train = train_map["<name>"];
-    if (train == Train::REDLINE){
-        red_line.find(stop_map["<name>"])
-    }
-
-else if 
-
-
-*/
