@@ -143,8 +143,8 @@ class Metro{
         //Dupont Circle
         vector<pair<string, int> > dupont_circle_adjacents;
         Stop dupont_circle("Dupont Circle", size_t(12), dupont_circle_adjacents);
-        pair<string, int> p21 = make_pair("Woodley Park", 2);
-        pair<string, int> p22 = make_pair("Dupont Circle", 2);
+        pair<string, int> p21 = make_pair("Woodley Park", 3);
+        pair<string, int> p22 = make_pair("Dupont Circle", 3);
         dupont_circle.adjacent_stops.push_back(p21);
         woodley_park.adjacent_stops.push_back(p22);
 
@@ -159,8 +159,8 @@ class Metro{
         //Metro Center
         vector<pair<string, int> > metro_center_adjacents;
         Stop metro_center("Metro Center", size_t(0), metro_center_adjacents);
-        pair<string, int> p25 = make_pair("Farragut North", 4);
-        pair<string, int> p26 = make_pair("Metro Center", 4);
+        pair<string, int> p25 = make_pair("Farragut North", 5);
+        pair<string, int> p26 = make_pair("Metro Center", 5);
         metro_center.adjacent_stops.push_back(p25);
         farragut_north.adjacent_stops.push_back(p26);
 
@@ -183,8 +183,8 @@ class Metro{
         //Union Station 
         vector<pair<string, int> > union_station_adjacents;
         Stop union_station("Union Station", size_t(15), union_station_adjacents);
-        pair<string, int> p31 = make_pair("Union Station", 2);
-        pair<string, int> p32 = make_pair("Judiciary Square", 2);
+        pair<string, int> p31 = make_pair("Union Station", 3);
+        pair<string, int> p32 = make_pair("Judiciary Square", 3);
         judiciary_square.adjacent_stops.push_back(p31);
         union_station.adjacent_stops.push_back(p32);
 
@@ -216,8 +216,8 @@ class Metro{
         //Fort Totten 
         vector<pair<string, int> > fort_totten_adjacents;
         Stop fort_totten("Fort Totten", size_t(2), fort_totten_adjacents);
-        pair<string, int> p39 = make_pair("Fort Totten", 4);
-        pair<string, int> p40 = make_pair("Brookland", 4);
+        pair<string, int> p39 = make_pair("Fort Totten", 5);
+        pair<string, int> p40 = make_pair("Brookland", 5);
         brookland.adjacent_stops.push_back(p39);
         fort_totten.adjacent_stops.push_back(p40);
 
@@ -225,16 +225,16 @@ class Metro{
         //Takoma
         vector<pair<string, int> > takoma_adjacents;
         Stop takoma("Takoma", size_t(19), takoma_adjacents);
-        pair<string, int> p41 = make_pair("Fort Totten", 4);
-        pair<string, int> p42 = make_pair("Takoma", 4);
+        pair<string, int> p41 = make_pair("Fort Totten", 5);
+        pair<string, int> p42 = make_pair("Takoma", 5);
         takoma.adjacent_stops.push_back(p41);
         fort_totten.adjacent_stops.push_back(p42);
 
         //Silver Spring
         vector<pair<string, int> > silver_spring_adjacents;
         Stop silver_spring("Silver Spring", size_t(20), silver_spring_adjacents);
-        pair<string, int> p43 = make_pair("Silver Spring", 3);
-        pair<string, int> p44 = make_pair("Takoma", 3);
+        pair<string, int> p43 = make_pair("Silver Spring", 4);
+        pair<string, int> p44 = make_pair("Takoma", 4);
         takoma.adjacent_stops.push_back(p43);
         silver_spring.adjacent_stops.push_back(p44);
 
@@ -257,8 +257,8 @@ class Metro{
         //Glenmont
         vector<pair<string, int> > glenmont_adjacents;
         Stop glenmont("Glenmont", size_t(23), glenmont_adjacents);
-        pair<string, int> p47 = make_pair("Wheaton", 2);
-        pair<string, int> p48 = make_pair("Glenmont", 2);
+        pair<string, int> p47 = make_pair("Wheaton", 3);
+        pair<string, int> p48 = make_pair("Glenmont", 3);
         glenmont.adjacent_stops.push_back(p47);
         wheaton.adjacent_stops.push_back(p48);
 
@@ -910,8 +910,7 @@ class Metro{
 
         //Huntington
         Stop huntington("Huntington", size_t(0), huntington_adjacents);
-        stop_map["Huntington"] = huntington;
-        train_map["Huntington"] = Train::YELLOW;
+
 
         //Eisenhower Ave
         Stop eisenhower_ave("Eisenhower Ave", size_t(1), eisenhower_ave_adjacents);
@@ -919,11 +918,10 @@ class Metro{
         pair<string, int> c2 = make_pair("Eisenhower Ave", 3);
         huntington.adjacent_stops.push_back(c1);
         eisenhower_ave.adjacent_stops.push_back(c2);
-        stop_map["Eisenhower Ave"] = eisenhower_ave;
-        train_map["Eisenhower Ave"] = Train::YELLOW;
+
 
         //Archives
-        Stop archives("Archives", size_t(0), eisenhower_ave_adjacents);
+        Stop archives("Archives", size_t(0), archives_adjacents);
         pair<string, int> c3 = make_pair("Archives", 3);
         pair<string, int> c4 = make_pair("L'Enfant Plaza", 3);
         pair<string, int> c44 = make_pair("Gallery Place", 2);
@@ -932,32 +930,191 @@ class Metro{
         archives.adjacent_stops.push_back(c4);
         archives.adjacent_stops.push_back(c44);
         gallery_place.adjacent_stops.push_back(c444);//Gallery Place
-        stop_map["Archives"] = archives;
-        train_map["Archives"] = Train::YELLOWGREEN;
+
+
+
+        //Mount Vernon Square
+        Stop mount_vernon_square("Mount Vernon Square", size_t(1), mount_vernon_square_adjacents);
+        pair<string, int> c5 = make_pair("Gallery Place", 2);
+        pair<string, int> c6 = make_pair("Mount Vernon Square", 2);
+        gallery_place.adjacent_stops.push_back(c6);
+        mount_vernon_square.adjacent_stops.push_back(c5);
+
+
+        //Shaw-Howard U
+        Stop shaw_howard_u("Shaw-Howard U", size_t(2), shaw_howard_u_adjacents);
+        pair<string, int> c7= make_pair("Shaw-Howard U", 2);
+        pair<string, int> c8 = make_pair("Mount Vernon Square", 2);
+        shaw_howard_u.adjacent_stops.push_back(c8);
+        mount_vernon_square.adjacent_stops.push_back(c7);
+
+
+
+        //U street
+        Stop u_street("U Street", size_t(3), u_street_adjacents);
+        pair<string, int> c9= make_pair("Shaw-Howard U", 3);
+        pair<string, int> c10 = make_pair("U Street", 3);
+        u_street.adjacent_stops.push_back(c9);
+        shaw_howard_u.adjacent_stops.push_back(c10);
+
+
+        //Columbia Heights
+        Stop columbia_heights("Columbia Heights", size_t(4), columbia_heights_adjacents);
+        pair<string, int> c11= make_pair("Columbia Heights", 3);
+        pair<string, int> c12 = make_pair("U Street", 3);
+        u_street.adjacent_stops.push_back(c11);
+        columbia_heights.adjacent_stops.push_back(c12);
+
+
+        //Georgia Ave-Petworth
+        Stop georgia_ave_petworth("Georgia Ave-Petworth", size_t(5), georgia_ave_petworth_adjacents);
+        pair<string, int> c13= make_pair("Columbia Heights", 3);
+        pair<string, int> c14 = make_pair("Georgia Ave-Petworth", 3);
+        georgia_ave_petworth.adjacent_stops.push_back(c13);
+        columbia_heights.adjacent_stops.push_back(c14);
+        pair<string, int> c15 = make_pair("Fort Totten", 4);
+        pair<string, int> c16 = make_pair("Georgia Ave-Petworth", 4);
+        georgia_ave_petworth.adjacent_stops.push_back(c15);
+        fort_totten.adjacent_stops.push_back(c16);
+
+
+        //West Hyattsville
+        Stop west_hyattsville("West Hyattsville", size_t(6), west_hyattsville_adjacents);
+        pair<string, int> c17= make_pair("West Hyattsville", 3);
+        pair<string, int> c18 = make_pair("Fort Totten", 3);
+        fort_totten.adjacent_stops.push_back(c17);
+        west_hyattsville.adjacent_stops.push_back(c18);
+
+
+        //Hyattsville Crossing
+        Stop hyattsville_crossing("Hyattsville Crossing", size_t(7), hyattsville_crossing_adjacents);
+        pair<string, int> c19= make_pair("West Hyattsville", 2);
+        pair<string, int> c20 = make_pair("Hyattsville Crossing", 2);
+        hyattsville_crossing.adjacent_stops.push_back(c19);
+        west_hyattsville.adjacent_stops.push_back(c20);
+
+
+        //College Park
+        Stop college_park("College Park", size_t(8), college_park_adjacents);
+        pair<string, int> c21= make_pair("College Park", 2);
+        pair<string, int> c22 = make_pair("Hyattsville Crossing", 2);
+        hyattsville_crossing.adjacent_stops.push_back(c21);
+        college_park.adjacent_stops.push_back(c22);
+
+        //Greenbelt
+        Stop greenbelt("Greenbelt", size_t(9), greenbelt_adjacents);
+        pair<string, int> c23= make_pair("College Park", 3);
+        pair<string, int> c24 = make_pair("Greenbelt", 3);
+        greenbelt.adjacent_stops.push_back(c23);
+        college_park.adjacent_stops.push_back(c24);
+
+        yellow_line.push_back(huntington);
+        yellow_line.push_back(eisenhower_ave);
+        yellowgreen_line.push_back(archives);
+        yellowgreen_line.push_back(mount_vernon_square);
+        yellowgreen_line.push_back(shaw_howard_u);
+        yellowgreen_line.push_back(u_street);
+        yellowgreen_line.push_back(columbia_heights);
+        yellowgreen_line.push_back(georgia_ave_petworth);
+        yellowgreen_line.push_back(west_hyattsville);
+        yellowgreen_line.push_back(hyattsville_crossing);
+        yellowgreen_line.push_back(college_park);
+        yellowgreen_line.push_back(greenbelt);
+
+        for (size_t y = 0; y < yellow_line.size(); y++){
+            stop_map[yellow_line[y].name] = yellow_line[y];
+            train_map[yellow_line[y].name] = Train::YELLOW;
+        }
+        for (size_t y = 0; y < yellowgreen_line.size(); y++){
+            stop_map[yellowgreen_line[y].name] = yellowgreen_line[y];
+            train_map[yellowgreen_line[y].name] = Train::YELLOWGREEN;
+        }
+
+
+    //-----------------------------End Yellow Line stops-------------------------------//
+
+
+    //--------------------------------Green Line stops---------------------------------//
+        vector<pair<string, int> > branch_ave_adjacents;
+        vector<pair<string, int> > suitland_adjacents;
+        vector<pair<string, int> > naylor_road_adjacents;
+        vector<pair<string, int> > southern_ave_adjacents;
+        vector<pair<string, int> > congress_heights_adjacents;
+        vector<pair<string, int> > anacostia_adjacents;
+        vector<pair<string, int> > navy_yard_adjacents;
+        vector<pair<string, int> > waterfront_adjacents;
 
 
 
 
+        //Branch Ave
+        Stop branch_ave("Branch Ave", size_t(0), branch_ave_adjacents);
+
+        //Suitland
+        Stop suitland("Suitland", size_t(1), suitland_adjacents);
+        pair<string, int> g1= make_pair("Branch Ave", 3);
+        pair<string, int> g2 = make_pair("Suitland", 3);
+        suitland.adjacent_stops.push_back(g1);
+        branch_ave.adjacent_stops.push_back(g2);
+
+        //Naylor Road
+        Stop naylor_road("Naylor Road", size_t(2), naylor_road_adjacents);
+        pair<string, int> g3= make_pair("Naylor Road", 2);
+        pair<string, int> g4 = make_pair("Suitland", 2);
+        suitland.adjacent_stops.push_back(g3);
+        naylor_road.adjacent_stops.push_back(g4);
+
+        //Southern Ave
+        Stop southern_ave("Southern Ave", size_t(3), southern_ave_adjacents);
+        pair<string, int> g5= make_pair("Naylor Road", 2);
+        pair<string, int> g6 = make_pair("Southern Ave", 2);
+        southern_ave.adjacent_stops.push_back(g5);
+        naylor_road.adjacent_stops.push_back(g6);
+
+        //Congress Heights
+        Stop congress_heights("Congress Heights", size_t(4), congress_heights_adjacents);
+        pair<string, int> g9= make_pair("Congress Heights", 3);
+        pair<string, int> g10 = make_pair("Southern Ave", 3);
+        southern_ave.adjacent_stops.push_back(g9);
+        congress_heights.adjacent_stops.push_back(g10);
+
+
+        //Anacostia
+        Stop anacostia("Anacostia", size_t(5), anacostia_adjacents);
+        pair<string, int> g11= make_pair("Congress Heights", 2);
+        pair<string, int> g12 = make_pair("Anacostia", 2);
+        anacostia.adjacent_stops.push_back(g11);
+        congress_heights.adjacent_stops.push_back(g12);
+
+        //Navy Yard
+        Stop navy_yard("Navy Yard", size_t(6), navy_yard_adjacents);
+        pair<string, int> g13= make_pair("Navy Yard", 4);
+        pair<string, int> g14 = make_pair("Anacostia", 4);
+        anacostia.adjacent_stops.push_back(g13);
+        navy_yard.adjacent_stops.push_back(g14);
+
+
+        //Waterfront
+        Stop waterfront("Waterfront", size_t(7), waterfront_adjacents);
+        pair<string, int> g15= make_pair("Navy Yard", 2);
+        pair<string, int> g16 = make_pair("Waterfront", 2);
+        waterfront.adjacent_stops.push_back(g13);
+        navy_yard.adjacent_stops.push_back(g14);
+        pair<string, int> g17= make_pair("L'Enfant Plaza", 4);
+        pair<string, int> g18 = make_pair("Waterfront", 4);
+        lenfant_plaza.adjacent_stops.push_back(g18);
+        waterfront.adjacent_stops.push_back(g17);
+
+        for (size_t g = 0; g < green_line.size(); g++){
+            stop_map[green_line[g].name] = green_line[g];
+            train_map[green_line[g].name] = Train::GREEN;
+        }
+
+    //--------------------------------Green Line stops end---------------------------------//
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //--------------------------------Multi Line stops-------------------------------------//
         train_map[metro_center.name] = Train::MULTI;
         train_map[gallery_place.name] = Train::MULTI;
         train_map[fort_totten.name] = Train::MULTI;
