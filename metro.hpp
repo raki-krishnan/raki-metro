@@ -158,7 +158,7 @@ class Metro{
 
         //Metro Center
         vector<pair<string, int> > metro_center_adjacents;
-        Stop metro_center("Metro Center", size_t(1), metro_center_adjacents);
+        Stop metro_center("Metro Center", size_t(0), metro_center_adjacents);
         pair<string, int> p25 = make_pair("Farragut North", 4);
         pair<string, int> p26 = make_pair("Metro Center", 4);
         metro_center.adjacent_stops.push_back(p25);
@@ -166,7 +166,7 @@ class Metro{
 
         //Gallery Place 
         vector<pair<string, int> > gallery_place_adjacents;
-        Stop gallery_place("Gallery Place", size_t(2), gallery_place_adjacents);
+        Stop gallery_place("Gallery Place", size_t(1), gallery_place_adjacents);
         pair<string, int> p27 = make_pair("Gallery Place", 3);
         pair<string, int> p28 = make_pair("Metro Center", 3);
         metro_center.adjacent_stops.push_back(p27);
@@ -215,7 +215,7 @@ class Metro{
 
         //Fort Totten 
         vector<pair<string, int> > fort_totten_adjacents;
-        Stop fort_totten("Fort Totten", size_t(3), fort_totten_adjacents);
+        Stop fort_totten("Fort Totten", size_t(2), fort_totten_adjacents);
         pair<string, int> p39 = make_pair("Fort Totten", 4);
         pair<string, int> p40 = make_pair("Brookland", 4);
         brookland.adjacent_stops.push_back(p39);
@@ -288,20 +288,12 @@ class Metro{
         red_line.push_back(forest_glen);
         red_line.push_back(wheaton);
         red_line.push_back(glenmont);
-        //add these stops to our unordered maps
+        //add these stops to our unordered maps, since we are done modifying them
         for (auto&trains: red_line){
             train_map[trains.name] = Train::RED;
             stop_map[trains.name] = trains;
         }
-        train_map[metro_center.name] = Train::MULTI;
-        train_map[gallery_place.name] = Train::MULTI;
-        train_map[fort_totten.name] = Train::MULTI;
-        stop_map[metro_center.name] = metro_center;
-        stop_map[gallery_place.name] = gallery_place;
-        stop_map[fort_totten.name] = fort_totten;
-        multi_line.push_back(metro_center);
-        multi_line.push_back(gallery_place);
-        multi_line.push_back(fort_totten);
+
         
         //------------------------------Red Line stops end----------------------------//
 
@@ -339,8 +331,6 @@ class Metro{
 
         //Franconia
         Stop franconia("Franconia", size_t(0), franconia_adjacents);
-        stop_map["Franconia"] = franconia;
-        train_map["Franconia"] = Train::BLUE;
         
 
         //Van Dorn Street
@@ -349,8 +339,7 @@ class Metro{
         pair<string, int> q2 = make_pair("Franconia", 5);
         franconia.adjacent_stops.push_back(q1);
         van_dorn_street.adjacent_stops.push_back(q2);
-        stop_map["Van Dorn Street"] = van_dorn_street;
-        train_map["Van Dorn Street"] = Train::BLUE;
+
 
 
         //King Street
@@ -359,8 +348,6 @@ class Metro{
         pair<string, int> q4 = make_pair("King Street", 5);
         king_street.adjacent_stops.push_back(q3);
         van_dorn_street.adjacent_stops.push_back(q4);
-        stop_map["King Street"] = king_street;
-        train_map["King Street"] = Train::BLUEYELLOW;
 
 
         //Braddock Road
@@ -369,8 +356,6 @@ class Metro{
         pair<string, int> q6 = make_pair("King Street", 2);
         king_street.adjacent_stops.push_back(q5);
         braddock_road.adjacent_stops.push_back(q6);
-        stop_map["Braddock Road"] = braddock_road;
-        train_map["Braddock Road"] = Train::BLUEYELLOW;
 
 
 
@@ -380,8 +365,7 @@ class Metro{
         pair<string, int> q8 = make_pair("Potomac Yard", 2);
         potomac_yard.adjacent_stops.push_back(q7);
         braddock_road.adjacent_stops.push_back(q8);
-        stop_map["Potomac Yard"] = potomac_yard;
-        train_map["Ptomoac Yard"] = Train::BLUEYELLOW;
+
 
 
         //DCA
@@ -390,8 +374,7 @@ class Metro{
         pair<string, int> q10 = make_pair("Potomac Yard", 2);
         potomac_yard.adjacent_stops.push_back(q9);
         dca.adjacent_stops.push_back(q10);
-        stop_map["DCA"] = dca;
-        train_map["DCA"] = Train::BLUEYELLOW;
+
 
 
         //Crystal City
@@ -400,8 +383,6 @@ class Metro{
         pair<string, int> q12 = make_pair("Crystal City", 2);
         crystal_city.adjacent_stops.push_back(q11);
         dca.adjacent_stops.push_back(q12);
-        stop_map["Crystal City"] = crystal_city;
-        train_map["Crystal City"] = Train::BLUEYELLOW;
 
 
         //Pentagon City
@@ -410,8 +391,7 @@ class Metro{
         pair<string, int> q14 = make_pair("Crystal City", 2);
         crystal_city.adjacent_stops.push_back(q13);
         pentagon_city.adjacent_stops.push_back(q14);
-        stop_map["Pentagon City"] = pentagon_city;
-        train_map["Pentagon City"] = Train::BLUEYELLOW;
+
 
 
         //Pentagon
@@ -420,8 +400,7 @@ class Metro{
         pair<string, int> q16 = make_pair("Pentagon", 2);
         pentagon.adjacent_stops.push_back(q15);
         pentagon_city.adjacent_stops.push_back(q16);
-        stop_map["Pentagon"] = pentagon;
-        train_map["Pentagon"] = Train::BLUEYELLOW;
+
 
 
         //Arlington Cemetary
@@ -430,8 +409,7 @@ class Metro{
         pair<string, int> q18 = make_pair("Pentagon", 3);
         pentagon.adjacent_stops.push_back(q17);
         arlington_cemetary.adjacent_stops.push_back(q18);
-        stop_map["Arlington Cemetary"] = arlington_cemetary;
-        train_map["Arlington Cemetary"] = Train::BLUE;
+
 
 
         //Rosslyn
@@ -473,7 +451,7 @@ class Metro{
         pair<string, int> mcmetro = make_pair("Metro Center", 2);
         pair<string, int> mcmetro2 = make_pair("Farragut West", 2);
         mcpherson_square.adjacent_stops.push_back(mcmetro);
-        multi_line[0].adjacent_stops.push_back(mcmetro2);
+        metro_center.adjacent_stops.push_back(mcmetro2);
         stop_map["McPherson Square"] = mcpherson_square;
         train_map["McPherson Square"] = Train::BLUESILVERORANGE;
 
@@ -483,7 +461,7 @@ class Metro{
         pair<string, int> q27 = make_pair("Metro Center", 2);
         pair<string, int> q28 = make_pair("Federal Triangle", 2);
         federal_triangle.adjacent_stops.push_back(q27);
-        multi_line[0].adjacent_stops.push_back(q28); //metro center is multi_line[0]
+        metro_center.adjacent_stops.push_back(q28); 
         stop_map["Federal Triangle"] = federal_triangle;
         train_map["Federal Triangle"] = Train::BLUESILVERORANGE;
 
@@ -503,8 +481,7 @@ class Metro{
         pair<string, int> q32 = make_pair("L'Enfant Plaza", 3);
         lenfant_plaza.adjacent_stops.push_back(q31);
         smithsonian.adjacent_stops.push_back(q32);
-        stop_map["L'Enfant Plaza"] = lenfant_plaza;
-        train_map["L'Enfant Plaza"] = Train::MULTI;
+
 
 
         //Federal Center   
@@ -524,8 +501,7 @@ class Metro{
         pair<string, int> q36 = make_pair("Capitol South", 2);
         capitol_south.adjacent_stops.push_back(q35);
         federal_center.adjacent_stops.push_back(q36);
-        stop_map["Capitol South"] = capitol_south;
-        train_map["Capitol South"] = Train::BLUESILVERORANGE;
+
 
 
 
@@ -535,8 +511,6 @@ class Metro{
         pair<string, int> q38 = make_pair("Capitol South", 2);
         capitol_south.adjacent_stops.push_back(q37);
         eastern_market.adjacent_stops.push_back(q38);
-        stop_map["Eastern Market"] = eastern_market;
-        train_map["Eastern Market"] = Train::BLUESILVERORANGE;
 
 
         //Potomac Ave
@@ -545,28 +519,25 @@ class Metro{
         pair<string, int> q40 = make_pair("Potomac Ave", 2);
         potomac_ave.adjacent_stops.push_back(q39);
         eastern_market.adjacent_stops.push_back(q40);
-        stop_map["Potomac Ave"] = potomac_ave;
-        train_map["Potomac Ave"] = Train::BLUESILVERORANGE;
 
 
-        //Statdium-Armory
-        Stop stadium_armory("Statdium-Armory", size_t(10), stadium_armory_adjacents);
-        pair<string, int> q41 = make_pair("Statdium-Armory", 2);
+
+        //Stadium-Armory
+        Stop stadium_armory("Stadium-Armory", size_t(10), stadium_armory_adjacents);
+        pair<string, int> q41 = make_pair("Stadium-Armory", 2);
         pair<string, int> q42 = make_pair("Potomac Ave", 2);
         potomac_ave.adjacent_stops.push_back(q41);
         stadium_armory.adjacent_stops.push_back(q42);
-        stop_map["Statdium-Armory"] = stadium_armory;
-        train_map["Statdium-Armory"] = Train::BLUESILVERORANGE;
+ 
 
 
         //Benning Road
         Stop benning_road("Benning Road", size_t(0), benning_road_adjacents);
-        pair<string, int> q43 = make_pair("Statdium-Armory", 4);
+        pair<string, int> q43 = make_pair("Stadium-Armory", 4);
         pair<string, int> q44 = make_pair("Benning Road", 4);
         benning_road.adjacent_stops.push_back(q43);
         stadium_armory.adjacent_stops.push_back(q44);
-        stop_map["Benning Road"] = benning_road;
-        train_map["Benning Road"] = Train::BLUESILVER;
+
 
 
         //Capitol Heights
@@ -575,8 +546,7 @@ class Metro{
         pair<string, int> q46 = make_pair("Benning Road", 2);
         benning_road.adjacent_stops.push_back(q45);
         capitol_heights.adjacent_stops.push_back(q46);
-        stop_map["Capitol Heights"] = capitol_heights;
-        train_map["Capitol Heights"] = Train::BLUESILVER;
+
 
 
         //Addison Road
@@ -585,8 +555,7 @@ class Metro{
         pair<string, int> q48 = make_pair("Addison Road", 2);
         addison_road.adjacent_stops.push_back(q47);
         capitol_heights.adjacent_stops.push_back(q48);
-        stop_map["Addison Road"] = addison_road;
-        train_map["Addison Road"] = Train::BLUESILVER;
+
 
         //Morgan Blvd
         Stop morgan_blvd("Morgan Blvd", size_t(3), morgan_blvd_adjacents);
@@ -594,8 +563,6 @@ class Metro{
         pair<string, int> q50 = make_pair("Addison Road", 2);
         addison_road.adjacent_stops.push_back(q49);
         morgan_blvd.adjacent_stops.push_back(q50);
-        stop_map["Morgan Blvd"] = morgan_blvd;
-        train_map["Morgan Blvd"] = Train::BLUESILVER;
 
 
         //Downtown Largo
@@ -604,8 +571,7 @@ class Metro{
         pair<string, int> q52 = make_pair("Downtown Largo", 2);
         downtown_largo.adjacent_stops.push_back(q51);
         morgan_blvd.adjacent_stops.push_back(q52);
-        stop_map["Downtown Largo"] = downtown_largo;
-        train_map["Downtown Largo"] = Train::BLUESILVER;
+
 
 
         //everything is pushed in upside-down order
@@ -625,7 +591,7 @@ class Metro{
         bluesilverorange_line.push_back(mcpherson_square);
         bluesilverorange_line.push_back(federal_triangle);
         bluesilverorange_line.push_back(smithsonian);
-        multi_line.push_back(lenfant_plaza);
+        
         bluesilverorange_line.push_back(federal_center);
         bluesilverorange_line.push_back(capitol_south);
         bluesilverorange_line.push_back(eastern_market);
@@ -636,6 +602,24 @@ class Metro{
         bluesilver_line.push_back(addison_road);
         bluesilver_line.push_back(morgan_blvd);
         bluesilver_line.push_back(downtown_largo);
+
+        //add to unordered_maps
+        for (size_t b = 0; b < blue_line.size(); b++){
+            stop_map[blue_line[b].name] = blue_line[b];
+            train_map[blue_line[b].name] = Train::BLUE;
+        }
+        for (size_t b = 0; b < blueyellow_line.size(); b++){
+            stop_map[blueyellow_line[b].name] = blueyellow_line[b];
+            train_map[blueyellow_line[b].name] = Train::BLUEYELLOW;
+        }
+        for (size_t b = 0; b < bluesilverorange_line.size(); b++){
+            stop_map[bluesilverorange_line[b].name] = bluesilverorange_line[b];
+            train_map[bluesilverorange_line[b].name] = Train::BLUESILVERORANGE;
+        }
+        for (size_t b = 0; b < bluesilver_line.size(); b++){
+            stop_map[bluesilver_line[b].name] = bluesilver_line[b];
+            train_map[bluesilver_line[b].name] = Train::BLUESILVER;
+        }
         //------------------------------Blue Line stops end-----------------------------//
 
 
@@ -656,8 +640,6 @@ class Metro{
 
         //Vienna
         Stop vienna("Vienna", size_t(0), vienna_adjacents);
-        stop_map["Vienna"] = vienna;
-        train_map["Vienna"] = Train::ORANGE;
 
         //Dunn Loring
         Stop dunn_loring("Dunn Loring", size_t(1), dunn_loring_adjacents);
@@ -665,8 +647,7 @@ class Metro{
         pair<string, int> a2 = make_pair("Dunn Loring", 2);
         dunn_loring.adjacent_stops.push_back(a1);
         vienna.adjacent_stops.push_back(a2);
-        stop_map["Dunn Loring"] = dunn_loring;
-        train_map["Dun Loring"] = Train::ORANGE;
+   
 
         //West Falls Church 
         Stop west_falls_church("West Falls Church", size_t(2), west_falls_church_adjacents);
@@ -674,8 +655,7 @@ class Metro{
         pair<string, int> a4 = make_pair("Dunn Loring", 2);
         dunn_loring.adjacent_stops.push_back(a3);
         west_falls_church.adjacent_stops.push_back(a4);
-        stop_map["West Falls Church"] = west_falls_church;
-        train_map["West Falls Church"] = Train::ORANGE;
+
 
         //East Falls Church 
         Stop east_falls_church("East Falls Church", size_t(0), east_falls_church_adjacents);
@@ -683,8 +663,7 @@ class Metro{
         pair<string, int> a6 = make_pair("East Falls Church", 3);
         east_falls_church.adjacent_stops.push_back(a5);
         west_falls_church.adjacent_stops.push_back(a6);
-        stop_map["East Falls Church"] = east_falls_church;
-        train_map["East Falls Church"] = Train::SILVERORANGE;
+
 
 
         //Ballston
@@ -693,9 +672,6 @@ class Metro{
         pair<string, int> a8 = make_pair("East Falls Church", 2);
         east_falls_church.adjacent_stops.push_back(a7);
         ballston.adjacent_stops.push_back(a8);
-        stop_map["Ballston"] = ballston;
-        train_map["Ballston"] = Train::SILVERORANGE;
-
 
 
         //Virginia Square
@@ -704,8 +680,7 @@ class Metro{
         pair<string, int> a10 = make_pair("Virginia Square", 2);
         virginia_square.adjacent_stops.push_back(a9);
         ballston.adjacent_stops.push_back(a10);
-        stop_map["Virginia Square"] = virginia_square;
-        train_map["Virginia Square"] = Train::SILVERORANGE;
+
 
         //Clarendon
         Stop clarendon("Clarendon", size_t(3), clarendon_adjacents);
@@ -713,8 +688,6 @@ class Metro{
         pair<string, int> a12 = make_pair("Virginia Square", 2);
         virginia_square.adjacent_stops.push_back(a11);
         clarendon.adjacent_stops.push_back(a12);
-        stop_map["Clarendon"] = clarendon;
-        train_map["Clarendon"] = Train::SILVERORANGE;
 
 
         //Court House
@@ -727,8 +700,6 @@ class Metro{
         pair<string,int> aa13 = make_pair("Court House", 3);
         bluesilverorange_line[0].adjacent_stops.push_back(aa13); //rosslyn
         court_house.adjacent_stops.push_back(aa14);
-        stop_map["Court House"] = court_house;
-        train_map["Court House"] = Train::SILVERORANGE;
 
         //Minnesota Ave
         Stop minnesota_ave("Minnesota Ave", size_t(3), minnesota_ave_adjacents);
@@ -736,8 +707,7 @@ class Metro{
         pair<string, int> a16 = make_pair("Stadium-Armory", 3);
         bluesilverorange_line[bluesilverorange_line.size() - 1].adjacent_stops.push_back(a15); //Stadium-Armory
         minnesota_ave.adjacent_stops.push_back(a16);
-        stop_map["Minnesota Ave"] = minnesota_ave;
-        train_map["Minnesota Ave"] = Train::ORANGE;
+
 
         //Deanwood
         Stop deanwood("Deanwood", size_t(4), deanwood_adjacents);
@@ -745,8 +715,7 @@ class Metro{
         pair<string, int> a18 = make_pair("Deanwood", 2);
         deanwood.adjacent_stops.push_back(a17);
         minnesota_ave.adjacent_stops.push_back(a18);
-        stop_map["Deanwood"] = deanwood;
-        train_map["Deanwood"] = Train::ORANGE;
+
 
 
         //Cheverly
@@ -755,8 +724,7 @@ class Metro{
         pair<string, int> a20 = make_pair("Deanwood", 3);
         deanwood.adjacent_stops.push_back(a19); 
         cheverly.adjacent_stops.push_back(a20);
-        stop_map["Cheverly"] = cheverly;
-        train_map["Cheverly"] = Train::ORANGE;
+
 
         //Landover
         Stop landover("Landover", size_t(6), landover_adjacents);
@@ -764,8 +732,7 @@ class Metro{
         pair<string, int> a22 = make_pair("Landover", 3);
         landover.adjacent_stops.push_back(a21); 
         cheverly.adjacent_stops.push_back(a22);
-        stop_map["Landover"] = landover;
-        train_map["Landover"] = Train::ORANGE;
+
 
         //New Carrollton
         Stop new_carrollton("New Carrollton", size_t(7), new_carrollton_adjacents);
@@ -773,8 +740,7 @@ class Metro{
         pair<string, int> a24 = make_pair("Landover", 2);
         landover.adjacent_stops.push_back(a23); 
         new_carrollton.adjacent_stops.push_back(a24);
-        stop_map["New Carrollton"] = new_carrollton;
-        train_map["New Carrollton"] = Train::ORANGE;
+
 
 
         orange_line.push_back(vienna);
@@ -790,6 +756,16 @@ class Metro{
         orange_line.push_back(cheverly);
         orange_line.push_back(landover);
         orange_line.push_back(new_carrollton);
+
+        //add to unordered_maps
+        for (size_t o = 0; o < orange_line.size(); o++){
+            stop_map[orange_line[o].name] = orange_line[o];
+            train_map[orange_line[o].name] = Train::ORANGE;
+        }
+        for (size_t o = 0; o < silverorange_line.size(); o++){
+            stop_map[silverorange_line[o].name] = silverorange_line[o];
+            train_map[silverorange_line[o].name] = Train::SILVERORANGE;
+        }
 
         //----------------------------Orange Line stops end------------------------------//
 
@@ -811,8 +787,6 @@ class Metro{
 
         //Ashburn
         Stop ashburn("Ashburn", size_t(0), ashburn_adjacents);
-        stop_map["Ashburn"] = ashburn;
-        train_map["Ashburn"] = Train::SILVER;
 
         //Loudon Gateway
         Stop loudon_gateway("Loudon Gateway", size_t(1), loudon_gateway_adjacents);
@@ -820,8 +794,7 @@ class Metro{
         pair<string, int> b2 = make_pair("Ashburn", 3);
         ashburn.adjacent_stops.push_back(b1);
         loudon_gateway.adjacent_stops.push_back(b2);
-        stop_map["Loudon Gateway"] = loudon_gateway;
-        train_map["Loudon Gateway"] = Train::SILVER;
+
 
         //IAD
         Stop iad("IAD", size_t(2), iad_adjacents);
@@ -829,8 +802,7 @@ class Metro{
         pair<string, int> b4 = make_pair("IAD", 3);
         iad.adjacent_stops.push_back(b3);
         loudon_gateway.adjacent_stops.push_back(b4);
-        stop_map["IAD"] = iad;
-        train_map["IAD"] = Train::SILVER;
+
 
         //Innovation Center
         Stop innovation_center("Innovation Center", size_t(3), innovation_center_adjacents);
@@ -838,8 +810,6 @@ class Metro{
         pair<string, int> b6 = make_pair("IAD", 3);
         iad.adjacent_stops.push_back(b5);
         innovation_center.adjacent_stops.push_back(b6);
-        stop_map["Innovation Center"] = innovation_center;
-        train_map["Innovation Center"] = Train::SILVER;
 
 
         //Herndon
@@ -848,8 +818,7 @@ class Metro{
         pair<string, int> b8 = make_pair("Herndon", 3);
         herndon.adjacent_stops.push_back(b7);
         innovation_center.adjacent_stops.push_back(b8);
-        stop_map["Herndon"] = herndon;
-        train_map["Herndon"] = Train::SILVER;
+
 
         //Reston Town Center
         Stop reston_town_center("Reston Town Center", size_t(5), reston_town_center_adjacents);
@@ -857,8 +826,7 @@ class Metro{
         pair<string, int> b10 = make_pair("Herndon", 3);
         herndon.adjacent_stops.push_back(b9);
         reston_town_center.adjacent_stops.push_back(b10);
-        stop_map["Reston Town Center"] = reston_town_center;
-        train_map["Reston Town Center"] = Train::SILVER;
+
 
 
         //Wiehle-Reston East
@@ -867,8 +835,6 @@ class Metro{
         pair<string, int> b12 = make_pair("Wiehle-Reston East", 2);
         wiehle_reston_east.adjacent_stops.push_back(b11);
         reston_town_center.adjacent_stops.push_back(b12);
-        stop_map["Wiehle-Reston East"] = wiehle_reston_east;
-        train_map["Wiehle-Reston East"] = Train::SILVER;
 
         //Spring Hill
         Stop spring_hill("Spring Hill", size_t(7), spring_hill_adjacents);
@@ -876,8 +842,7 @@ class Metro{
         pair<string, int> b14 = make_pair("Wiehle-Reston East", 2);
         wiehle_reston_east.adjacent_stops.push_back(b13);
         spring_hill.adjacent_stops.push_back(b14);
-        stop_map["Spring Hill"] = spring_hill;
-        train_map["Spring Hill"] = Train::SILVER;
+
 
 
         //Greensboro
@@ -886,8 +851,7 @@ class Metro{
         pair<string, int> b16 = make_pair("Greensboro", 3);
         greensboro.adjacent_stops.push_back(b15);
         spring_hill.adjacent_stops.push_back(b16);
-        stop_map["Greensboro"] = greensboro;
-        train_map["Greensboro"] = Train::SILVER;
+
 
         //Tysons
         Stop tysons("Tysons", size_t(9), tysons_adjacents);
@@ -895,8 +859,7 @@ class Metro{
         pair<string, int> b18 = make_pair("Greensboro", 2);
         greensboro.adjacent_stops.push_back(b17);
         tysons.adjacent_stops.push_back(b18);
-        stop_map["Tysons"] = tysons;
-        train_map["Tysons"] = Train::SILVER;
+
 
         //McLean
         Stop mclean("McLean", size_t(10), mclean_adjacents);
@@ -908,8 +871,7 @@ class Metro{
         pair<string, int> b22 = make_pair("East Falls Church", 4);
         mclean.adjacent_stops.push_back(b22);
         silverorange_line[0].adjacent_stops.push_back(b21);
-        stop_map["McLean"] = mclean;
-        train_map["McLean"] = Train::SILVER;
+
 
 
         silver_line.push_back(ashburn);
@@ -924,12 +886,90 @@ class Metro{
         silver_line.push_back(tysons);
         silver_line.push_back(mclean);
 
+        
+        for (size_t s = 0; s < silver_line.size(); s++){
+            stop_map[silver_line[s].name] = silver_line[s];
+            train_map[silver_line[s].name] = Train::SILVER;
+        }
 
         //------------------------------Silver Line stops end-----------------------------//
 
+        //--------------------------------Yellow Line stops-------------------------------//
+        vector<pair<string, int> > huntington_adjacents;
+        vector<pair<string, int> > eisenhower_ave_adjacents;
+        vector<pair<string, int> > archives_adjacents;
+        vector<pair<string, int> > mount_vernon_square_adjacents;
+        vector<pair<string, int> > shaw_howard_u_adjacents;
+        vector<pair<string, int> > u_street_adjacents;
+        vector<pair<string, int> > columbia_heights_adjacents;
+        vector<pair<string, int> > georgia_ave_petworth_adjacents;
+        vector<pair<string, int> > west_hyattsville_adjacents;
+        vector<pair<string, int> > hyattsville_crossing_adjacents;
+        vector<pair<string, int> > college_park_adjacents;
+        vector<pair<string, int> > greenbelt_adjacents;
+
+        //Huntington
+        Stop huntington("Huntington", size_t(0), huntington_adjacents);
+        stop_map["Huntington"] = huntington;
+        train_map["Huntington"] = Train::YELLOW;
+
+        //Eisenhower Ave
+        Stop eisenhower_ave("Eisenhower Ave", size_t(1), eisenhower_ave_adjacents);
+        pair<string, int> c1 = make_pair("Huntington", 3);
+        pair<string, int> c2 = make_pair("Eisenhower Ave", 3);
+        huntington.adjacent_stops.push_back(c1);
+        eisenhower_ave.adjacent_stops.push_back(c2);
+        stop_map["Eisenhower Ave"] = eisenhower_ave;
+        train_map["Eisenhower Ave"] = Train::YELLOW;
+
+        //Archives
+        Stop archives("Archives", size_t(0), eisenhower_ave_adjacents);
+        pair<string, int> c3 = make_pair("Archives", 3);
+        pair<string, int> c4 = make_pair("L'Enfant Plaza", 3);
+        pair<string, int> c44 = make_pair("Gallery Place", 2);
+        pair<string, int> c444 = make_pair("Archives", 2);
+        lenfant_plaza.adjacent_stops.push_back(c3);//L'enfant Plaza
+        archives.adjacent_stops.push_back(c4);
+        archives.adjacent_stops.push_back(c44);
+        gallery_place.adjacent_stops.push_back(c444);//Gallery Place
+        stop_map["Archives"] = archives;
+        train_map["Archives"] = Train::YELLOWGREEN;
 
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        train_map[metro_center.name] = Train::MULTI;
+        train_map[gallery_place.name] = Train::MULTI;
+        train_map[fort_totten.name] = Train::MULTI;
+        train_map[lenfant_plaza.name] = Train::MULTI;
+        stop_map[metro_center.name] = metro_center;
+        stop_map[gallery_place.name] = gallery_place;
+        stop_map[fort_totten.name] = fort_totten;
+        stop_map[lenfant_plaza.name] = lenfant_plaza;
+        multi_line.push_back(metro_center);
+        multi_line.push_back(gallery_place);
+        multi_line.push_back(fort_totten);
+        multi_line.push_back(lenfant_plaza);
 
     };
 
