@@ -8,7 +8,7 @@ using namespace std;
 class Stop{
     public:
 
-    Stop() : name(""), index(0) {}
+    Stop() : name("default"), index(0) {}
 
     Stop(string name_in, size_t index_in, vector<pair<string, int> > &adj_in): 
     name(name_in), index(index_in), adjacent_stops(adj_in) {}
@@ -418,8 +418,7 @@ class Metro{
         pair<string, int> q20 = make_pair("Rosslyn", 3);
         rosslyn.adjacent_stops.push_back(q19);
         arlington_cemetary.adjacent_stops.push_back(q20);
-        stop_map["Rosslyn"] = rosslyn;
-        train_map["Rosslyn"] = Train::BLUESILVERORANGE;
+
 
 
         //Foggy Bottom
@@ -428,8 +427,7 @@ class Metro{
         pair<string, int> q22 = make_pair("Rosslyn", 3);
         rosslyn.adjacent_stops.push_back(q21);
         foggy_bottom.adjacent_stops.push_back(q22);
-        stop_map["Foggy Bottom"] = foggy_bottom;
-        train_map["Foggy Bottom"] = Train::BLUESILVERORANGE;
+
 
 
         //Farragut West
@@ -438,8 +436,7 @@ class Metro{
         pair<string, int> q24 = make_pair("Farragut West", 2);
         farragut_west.adjacent_stops.push_back(q23);
         foggy_bottom.adjacent_stops.push_back(q24);
-        stop_map["Farragut West"] = farragut_west;
-        train_map["Farragut West"] = Train::BLUESILVERORANGE;
+
 
 
         //McPherson Square
@@ -452,8 +449,7 @@ class Metro{
         pair<string, int> mcmetro2 = make_pair("Farragut West", 2);
         mcpherson_square.adjacent_stops.push_back(mcmetro);
         metro_center.adjacent_stops.push_back(mcmetro2);
-        stop_map["McPherson Square"] = mcpherson_square;
-        train_map["McPherson Square"] = Train::BLUESILVERORANGE;
+
 
 
         //Federal Triangle
@@ -462,8 +458,6 @@ class Metro{
         pair<string, int> q28 = make_pair("Federal Triangle", 2);
         federal_triangle.adjacent_stops.push_back(q27);
         metro_center.adjacent_stops.push_back(q28); 
-        stop_map["Federal Triangle"] = federal_triangle;
-        train_map["Federal Triangle"] = Train::BLUESILVERORANGE;
 
 
         //Smithsonian
@@ -472,8 +466,6 @@ class Metro{
         pair<string, int> q30 = make_pair("Federal Triangle", 2);
         federal_triangle.adjacent_stops.push_back(q29);
         smithsonian.adjacent_stops.push_back(q30);
-        stop_map["Smithsonian"] = smithsonian;
-        train_map["Smithsonian"] = Train::BLUESILVERORANGE;
 
         //L'Enfant Plaza
         Stop lenfant_plaza("L'Enfant Plaza", size_t(3), lenfant_plaza_adjacents);
@@ -490,8 +482,7 @@ class Metro{
         pair<string, int> q34 = make_pair("L'Enfant Plaza", 2);
         lenfant_plaza.adjacent_stops.push_back(q33);
         federal_center.adjacent_stops.push_back(q34);
-        stop_map["Federal Center"] = federal_center;
-        train_map["Federal Center"] = Train::BLUESILVERORANGE;
+
 
 
 
@@ -506,7 +497,7 @@ class Metro{
 
 
         //Eastern Market   
-        Stop eastern_market("Capitol South", size_t(8), eastern_market_adjacents);
+        Stop eastern_market("Eastern Market", size_t(8), eastern_market_adjacents);
         pair<string, int> q37 = make_pair("Eastern Market", 2);
         pair<string, int> q38 = make_pair("Capitol South", 2);
         capitol_south.adjacent_stops.push_back(q37);
@@ -1104,6 +1095,16 @@ class Metro{
         pair<string, int> g18 = make_pair("Waterfront", 4);
         lenfant_plaza.adjacent_stops.push_back(g18);
         waterfront.adjacent_stops.push_back(g17);
+
+
+        green_line.push_back(branch_ave);
+        green_line.push_back(suitland);
+        green_line.push_back(naylor_road);
+        green_line.push_back(southern_ave);
+        green_line.push_back(congress_heights);
+        green_line.push_back(anacostia);
+        green_line.push_back(navy_yard);
+        green_line.push_back(waterfront);
 
         for (size_t g = 0; g < green_line.size(); g++){
             stop_map[green_line[g].name] = green_line[g];
