@@ -19,20 +19,20 @@ class MetroSolver{
         int counter = 0;
 
         for (size_t count = 0; count < metro.master_list.size(); count++){
-            min_distance = std::numeric_limits<int>::infinity();
+            min_distance = 9000000;
 
             for (size_t i = 0; i < metro.master_list.size(); ++i){
-                if (!metro.master_list[i].finalized){
-                    if (metro.master_list[i].dist_from_start <= min_distance){
-                        min_distance = metro.master_list[i].dist_from_start;
+                if (!metro.stop_map[metro.master_list[i].name].finalized){
+                    if (metro.stop_map[metro.master_list[i].name].dist_from_start <= min_distance){
+                        min_distance = int(metro.stop_map[metro.master_list[i].name].dist_from_start);
                         curV = i;
                     }
                 }
             }
 
-            current = metro.master_list[curV];
-            metro.master_list[curV].finalized = true;
-            if (metro.master_list[curV].name == destination){
+            current = metro.stop_map[metro.master_list[curV].name];
+            metro.stop_map[metro.master_list[curV].name].finalized = true;
+            if (current.name == destination){
                 break;
             }
 
@@ -41,9 +41,9 @@ class MetroSolver{
                 if (!metro.stop_map[metro.stop_map[current.name].adjacent_stops[i].first].finalized){
                     //the below code finds the distance from our adjacent stop from the starting point
                     //and then sets that distance
-                    int dist = current.dist_from_start + metro.stop_map[current.name].adjacent_stops[i].second;
+                    int dist = int(current.dist_from_start + metro.stop_map[current.name].adjacent_stops[i].second);
                     //update distance if its less than this stops current lowest distance
-                    if (dist <=  metro.stop_map[current.name].adjacent_stops[i].second){
+                    if (dist <=  metro.stop_map[metro.stop_map[current.name].adjacent_stops[i].first].dist_from_start){
                         metro.stop_map[metro.stop_map[current.name].adjacent_stops[i].first].parent = current.name;
                         metro.stop_map[metro.stop_map[current.name].adjacent_stops[i].first].dist_from_start = dist;
                     }
@@ -64,7 +64,9 @@ class MetroSolver{
             stop = metro.stop_map[stop.parent];
         }
         final_path.push_front(metro.stop_map[starting_point]);
-        final_time = metro.stop_map[destination].dist_from_start;
+        final_time = int(metro.stop_map[destination].dist_from_start);
+
+        cout << "FINAL TIME = " << final_time;
 
     }
 
