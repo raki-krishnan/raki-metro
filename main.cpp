@@ -90,6 +90,16 @@ cout << "////////////////////////// SILVERORAGE LINE //////////////////////////\
         cout << boomin.silverorange_line[i].adjacent_stops[1].first << "\n";
     }
     cout << boomin.silverorange_line[boomin.silverorange_line.size() - 1].adjacent_stops[0].first << "\n";
+
+
+    cout << "////////////////////////// BLUEYELLOW LINE //////////////////////////\n\n";
+    cout << boomin.blueyellow_line[0].adjacent_stops[0].first << "\n";
+    for (size_t i = 1; i < boomin.blueyellow_line.size() - 1; i++){
+        cout << boomin.blueyellow_line[i].adjacent_stops[0].first << " <-- ";
+        cout << boomin.blueyellow_line[i].name << " --> ";
+        cout << boomin.blueyellow_line[i].adjacent_stops[1].first << "\n";
+    }
+    cout << boomin.blueyellow_line[boomin.blueyellow_line.size() - 1].adjacent_stops[0].first << "\n";
 }
 
 
@@ -99,7 +109,7 @@ int main(){
     boomin.declare_stops();
     string destination_station;
     string starting_station;
-    //pretty_print(boomin);
+    pretty_print(boomin);
     cout << "Welcome! If you're travelling on the DC Metro, you have come to the right place.\n";
     cout << "We will tell you how to get to your destination in the quickest way possible.\n";
     cout << "To start, please enter the metro station that you are starting at: ";

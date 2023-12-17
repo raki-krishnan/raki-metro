@@ -489,6 +489,10 @@ class Metro{
         pair<string, int> q32 = make_pair("L'Enfant Plaza", 3);
         lenfant_plaza.adjacent_stops.push_back(q31);
         smithsonian.adjacent_stops.push_back(q32);
+        pair<string, int> q311 = make_pair("Pentagon", 6);
+        pair<string, int> q322 = make_pair("L'Enfant Plaza", 6);
+        lenfant_plaza.adjacent_stops.push_back(q311);
+        pentagon.adjacent_stops.push_back(q322);
 
 
 
@@ -584,7 +588,7 @@ class Metro{
         //everything is pushed in upside-down order
         blue_line.push_back(franconia);
         blue_line.push_back(van_dorn_street);   
-        blueyellow_line.push_back(king_street);
+        
         blueyellow_line.push_back(braddock_road);
         blueyellow_line.push_back(potomac_yard);
         blueyellow_line.push_back(dca);
@@ -592,7 +596,7 @@ class Metro{
         blueyellow_line.push_back(pentagon_city);
         blueyellow_line.push_back(pentagon);
         blue_line.push_back(arlington_cemetary);
-        bluesilverorange_line.push_back(rosslyn);
+        
         bluesilverorange_line.push_back(foggy_bottom);
         bluesilverorange_line.push_back(farragut_west);
         bluesilverorange_line.push_back(mcpherson_square);
@@ -603,7 +607,7 @@ class Metro{
         bluesilverorange_line.push_back(capitol_south);
         bluesilverorange_line.push_back(eastern_market);
         bluesilverorange_line.push_back(potomac_ave);
-        bluesilverorange_line.push_back(stadium_armory);
+        
         bluesilver_line.push_back(benning_road);
         bluesilver_line.push_back(capitol_heights);
         bluesilver_line.push_back(addison_road);
@@ -705,7 +709,7 @@ class Metro{
         clarendon.adjacent_stops.push_back(a14);
         pair<string, int> aa14 = make_pair ("Rosslyn", 3);
         pair<string,int> aa13 = make_pair("Court House", 3);
-        bluesilverorange_line[0].adjacent_stops.push_back(aa13); //rosslyn
+        rosslyn.adjacent_stops.push_back(aa13); //rosslyn
         court_house.adjacent_stops.push_back(aa14);
 
         //Minnesota Ave
@@ -714,6 +718,7 @@ class Metro{
         pair<string, int> a16 = make_pair("Stadium-Armory", 3);
         bluesilverorange_line[bluesilverorange_line.size() - 1].adjacent_stops.push_back(a15); //Stadium-Armory
         minnesota_ave.adjacent_stops.push_back(a16);
+        stadium_armory.adjacent_stops.push_back(a15);
 
 
         //Deanwood
@@ -758,6 +763,12 @@ class Metro{
         silverorange_line.push_back(virginia_square);
         silverorange_line.push_back(clarendon);
         silverorange_line.push_back(court_house);
+        bluesilverorange_line.push_back(rosslyn);
+        bluesilverorange_line.push_back(stadium_armory);
+        stop_map[rosslyn.name] = rosslyn;
+        stop_map[stadium_armory.name] = stadium_armory;
+        train_map[rosslyn.name] = Train::BLUESILVERORANGE;
+        train_map[stadium_armory.name] = Train::BLUESILVERORANGE;
         orange_line.push_back(minnesota_ave);
         orange_line.push_back(deanwood);
         orange_line.push_back(cheverly);
@@ -877,7 +888,10 @@ class Metro{
         pair<string, int> b21 = make_pair("McLean", 4);
         pair<string, int> b22 = make_pair("East Falls Church", 4);
         mclean.adjacent_stops.push_back(b22);
+        east_falls_church.adjacent_stops.push_back(b21);
         silverorange_line[0].adjacent_stops.push_back(b21);
+        stop_map[east_falls_church.name] = east_falls_church;
+
 
 
 
@@ -923,9 +937,12 @@ class Metro{
         Stop eisenhower_ave("Eisenhower Ave", size_t(1), eisenhower_ave_adjacents);
         pair<string, int> c1 = make_pair("Huntington", 3);
         pair<string, int> c2 = make_pair("Eisenhower Ave", 3);
-        huntington.adjacent_stops.push_back(c1);
-        eisenhower_ave.adjacent_stops.push_back(c2);
-
+        huntington.adjacent_stops.push_back(c2);
+        eisenhower_ave.adjacent_stops.push_back(c1);
+        pair<string, int> c222 = make_pair("Eisenhower Ave", 3);
+        pair<string, int> c232 = make_pair("King Street", 3);
+        eisenhower_ave.adjacent_stops.push_back(c232);
+        king_street.adjacent_stops.push_back(c222);
 
         //Archives
         Stop archives("Archives", size_t(0), archives_adjacents);
@@ -1017,6 +1034,9 @@ class Metro{
 
         yellow_line.push_back(huntington);
         yellow_line.push_back(eisenhower_ave);
+        blueyellow_line.push_back(king_street);
+        stop_map[king_street.name] = king_street;
+        train_map[king_street.name] = Train::BLUEYELLOW;
         yellowgreen_line.push_back(archives);
         yellowgreen_line.push_back(mount_vernon_square);
         yellowgreen_line.push_back(shaw_howard_u);
@@ -1105,8 +1125,8 @@ class Metro{
         Stop waterfront("Waterfront", size_t(7), waterfront_adjacents);
         pair<string, int> g15= make_pair("Navy Yard", 2);
         pair<string, int> g16 = make_pair("Waterfront", 2);
-        waterfront.adjacent_stops.push_back(g13);
-        navy_yard.adjacent_stops.push_back(g14);
+        waterfront.adjacent_stops.push_back(g15);
+        navy_yard.adjacent_stops.push_back(g16);
         pair<string, int> g17= make_pair("L'Enfant Plaza", 4);
         pair<string, int> g18 = make_pair("Waterfront", 4);
         lenfant_plaza.adjacent_stops.push_back(g18);
