@@ -126,8 +126,8 @@ int main(){
 
     cout << "Great! Here is the fastest way to get from " 
     << starting_station << " to " << destination_station << ": ";
-    MetroSolver solver(starting_station, destination_station, boomin);
-    solver.solve();
+    MetroSolver dijkstra(starting_station, destination_station, boomin);
+    dijkstra.solve();
 
     return 0;
 }
