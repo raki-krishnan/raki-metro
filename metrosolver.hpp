@@ -202,14 +202,13 @@ class MetroSolver{
         }
 
         else if ((current_train == Train:: BLUEYELLOW && last_train == Train::MULTI)){
-            //we are coming from lenfant plaza
+            //we are coming from l'enfant plaza
 
         }
-        else if (current_train == Train:: BLUEYELLOW && (last_train == Train::YELLOW || last_train == Train::BLUE))){
+        else if (current_train == Train:: BLUEYELLOW && (last_train == Train::YELLOW || last_train == Train::BLUE)){
             if (determine_train(final_path[final_path.size() - 1]) == Train::BLUE){
 
             }
-            
         }
     }
 
