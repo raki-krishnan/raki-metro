@@ -1,4 +1,4 @@
-g++ -std=c++17 -Wconversion -Wall -Werror -Wextra -pedantic -g main.cpp
+g++ -std=c++17 -Wconversion -Wall -Werror -Wextra -pedantic -g main.hpp
 ./a.out
 
 make metro

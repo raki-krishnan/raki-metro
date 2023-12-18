@@ -1,19 +1,21 @@
 CXX = g++
 EXECUTABLE = metro
-SRCS = $(shell find . -name "*.hpp")
+SOURCES = main.cpp
+HEADERS = metro.hpp metrosolver.hpp
 CXXFLAGS = -std=c++17 -Wconversion -Wall -Werror -Wextra -pedantic
 
-
 .PHONY: all
-all : $(EXECUTABLE)
+all: $(EXECUTABLE)
 
 .PHONY: clean
-clean : 
+clean:
 	rm -f $(EXECUTABLE)
+	rm main.hpp.gch
+	
 
 .PHONY: run
 run: $(EXECUTABLE)
 	./$(EXECUTABLE)
 
-$(EXECUTABLE) : $(SRCS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+$(EXECUTABLE): $(SOURCES) $(HEADERS)
+	$(CXX) $(CXXFLAGS) -o $@ $(SOURCES)

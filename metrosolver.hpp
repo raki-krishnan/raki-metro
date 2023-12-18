@@ -14,7 +14,6 @@ class MetroSolver{
         metro.stop_map[starting_point].dist_from_start = 0;
         int min_distance = 0;
         size_t curV = 0;
-        priority_queue<Stop, vector<Stop>, StopComp> pQ;
         Stop current;
         //int counter = 0;
 
