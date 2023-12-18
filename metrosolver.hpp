@@ -49,7 +49,7 @@ class MetroSolver{
                     //and then sets that distance
                     int dist = int(current.dist_from_start + metro.stop_map[current.name].adjacent_stops[i].second);
                     //update distance if its less than this stops current lowest distance
-                    if (dist <=  metro.stop_map[metro.stop_map[current.name].adjacent_stops[i].first].dist_from_start){
+                    if (dist <= metro.stop_map[metro.stop_map[current.name].adjacent_stops[i].first].dist_from_start){
                         metro.stop_map[metro.stop_map[current.name].adjacent_stops[i].first].parent = current.name;
                         metro.stop_map[metro.stop_map[current.name].adjacent_stops[i].first].dist_from_start = dist;
                     }
@@ -431,6 +431,10 @@ class MetroSolver{
             //we are at the pentagon, coming from L'Enfant, and going to Arlington
             cout << "on the yellow line, get off the yellow line at Pentagon and board the blue line.\n";
         }
+        else if (final_path[index].name == "Pentagon" && next_train == Train::MULTI && last_train == Train::BLUE){
+            //we are at the pentagon, coming from Arlington, and going to L'Enfant
+            cout << "on the blue line, get off the blue line at Pentagon and board the yellow line.\n";
+        }
         else if (last_train == Train::ORANGE && current_train == Train::BLUESILVERORANGE && next_train == Train::BLUESILVER){
             cout << "on the orange line, get off the orange line at Stadium-Armory and board the blue or silver line.\n";
         }
@@ -438,9 +442,6 @@ class MetroSolver{
             if (determine_train(final_path[0]) == Train::ORANGE){ //we came from the left hand side orange line
                 cout << "on orange line, get off the orange line at Stadium-Armory and board the blue or silver line.\n";
             }     
-        }
-        else if (final_path[index].name == "Pentagon" && last_train == Train::MULTI && next_train == Train::BLUE){
-            cout << "on the yellow line, get off the yellow line at Pentagon and board the blue line.\n";
         }
         else if (current_train == Train::SILVER && next_train == Train::ORANGE){
             cout << "on the silver line, get off the silver line at East Falls Church and board the orange line.\n";

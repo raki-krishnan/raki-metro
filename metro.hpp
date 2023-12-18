@@ -192,7 +192,7 @@ class Metro{
         vector<pair<string, int> > judiciary_square_adjacents;
         Stop judiciary_square("Judiciary Square", size_t(14), judiciary_square_adjacents);
         pair<string, int> p29 = make_pair("Gallery Place", 2);
-        pair<string, int> p30 = make_pair("Judiciacry Square", 2);
+        pair<string, int> p30 = make_pair("Judiciary Square", 2);
         judiciary_square.adjacent_stops.push_back(p29);
         gallery_place.adjacent_stops.push_back(p30);
 
