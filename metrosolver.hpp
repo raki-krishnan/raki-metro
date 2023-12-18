@@ -375,6 +375,9 @@ class MetroSolver{
             }
             
         }
+        if (final_path[index].name == "Benning Road" && final_path[index - 1].name == "Stadium-Armory"){
+            return true;
+        }
 
         //check MULTIS
         if (current_train == Train::MULTI){

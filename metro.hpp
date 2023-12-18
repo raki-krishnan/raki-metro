@@ -544,8 +544,8 @@ class Metro{
 
         //Benning Road
         Stop benning_road("Benning Road", size_t(0), benning_road_adjacents);
-        pair<string, int> q43 = make_pair("Stadium-Armory", 4);
-        pair<string, int> q44 = make_pair("Benning Road", 4);
+        pair<string, int> q43 = make_pair("Stadium-Armory", 6);
+        pair<string, int> q44 = make_pair("Benning Road", 6);
         benning_road.adjacent_stops.push_back(q43);
         stadium_armory.adjacent_stops.push_back(q44);
 
