@@ -82,6 +82,18 @@ class MetroSolver{
         return train;
     }
 
+    bool check_for_lenfant_pentagon_arlington(){
+        for (size_t i = 0; i < final_path.size() - 2; ++i){
+            if (final_path[i].name == "L'Enfant Plaza"){
+                if (final_path[i + 1].name == "Pentagon"){
+                    if (final_path[i+2].name == "Arlington Cemetary"){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
     void print_opening_statement(){
         Train train = determine_train(final_path[0]);
@@ -152,7 +164,20 @@ class MetroSolver{
                 cout << "the yellow line ";
             }
             else{
-                cout << "either the blue or yellow line ";
+                bool lenfant = false;
+                for (size_t i = 0; i < final_path.size(); ++i){
+                    if (final_path[i].name == "L'Enfant Plaza"){
+                        lenfant = true;
+                        break;
+                    }
+                }
+                if (lenfant){
+                    cout << "the yellow line ";
+                }
+                else {
+                    cout << "either the blue or yellow line ";
+                }
+                
             }
         }
         else if (train == Train::SILVERORANGE){
@@ -270,7 +295,7 @@ class MetroSolver{
             || (current_train == Train::BLUESILVER && (next_train == Train::BLUE || next_train == Train::SILVER)) //bluesilver checks
             || ((current_train == Train::SILVER || current_train == Train::BLUE) && next_train == Train::BLUESILVER) 
             || ((current_train == Train::BLUE || current_train == Train::YELLOW) && next_train == Train::BLUEYELLOW) //blueyellow checks
-            || (current_train == Train::BLUEYELLOW && (next_train == Train::YELLOW || next_train == Train::BLUE)) 
+            || (current_train == Train::BLUEYELLOW && (next_train == Train::YELLOW || next_train == Train::BLUE) && final_path[index + 1].name != "Arlington Cemetary") 
             || ((current_train == Train::SILVER || current_train == Train::ORANGE) && next_train == Train::SILVERORANGE) //silverorange checks
             || (current_train == Train::SILVERORANGE && (next_train == Train::SILVER || next_train == Train::ORANGE))
             || ((current_train == Train::SILVER || current_train == Train::ORANGE || current_train == Train::BLUE || current_train == Train::BLUESILVER) 
@@ -300,6 +325,16 @@ class MetroSolver{
                 return true;
             }
         }
+        if (current_train == Train::BLUEYELLOW && last_train == Train::MULTI){
+            //if we are going from l'enfant to pentagon
+            if (next_train != Train::BLUE){
+                return true;
+            }
+            else {
+                return false;
+            }
+            
+        }
 
         //check MULTIS
         if (current_train == Train::MULTI){
@@ -310,7 +345,7 @@ class MetroSolver{
                 if (next_train == Train::YELLOWGREEN && (last_train == Train::YELLOW || last_train == Train::GREEN)){
                     return true;
                 }
-                if (last_train == Train::YELLOWGREEN && (next_train == Train::YELLOW || next_train == Train::GREEN)){
+                if (last_train == Train::YELLOWGREEN && (next_train == Train::YELLOW || next_train == Train::GREEN || next_train == Train::BLUEYELLOW)){
                     return true;
                 }
                 if (last_train == Train::BLUEYELLOW && determine_train(final_path[0]) != Train::BLUE && next_train == Train::YELLOWGREEN){
@@ -352,13 +387,20 @@ class MetroSolver{
 
     void print_switch_message(Train current_train, Train next_train, Train last_train, size_t index){
         //template: on the <past color> line, at <stop name>, get off the <past color> line at <stop name> and board <current color> line
-        if (last_train == Train::ORANGE && current_train == Train::BLUESILVERORANGE && next_train == Train::BLUESILVER){
+        if (final_path[index].name == "Pnetagon" && last_train == Train::MULTI && next_train == Train::BLUE){
+            //we are at the pentagon, coming from L'Enfant, and going to Arlington
+            cout << "on the yellow line, get off the yellow line at Pentagon and board the blue line.\n";
+        }
+        else if (last_train == Train::ORANGE && current_train == Train::BLUESILVERORANGE && next_train == Train::BLUESILVER){
             cout << "on the orange line, get off the orange line at Stadium-Armory and board the blue or silver line.\n";
         }
         else if(current_train == Train::BLUESILVERORANGE && next_train == Train::BLUESILVER){
             if (determine_train(final_path[0]) == Train::ORANGE){ //we came from the left hand side orange line
                 cout << "on orange line, get off the orange line at Stadium-Armory and board the blue or silver line.\n";
             }     
+        }
+        else if (final_path[index].name == "Pentagon" && last_train == Train::MULTI && next_train == Train::BLUE){
+            cout << "on the yellow line, get off the yellow line at Pentagon and board the blue line.\n";
         }
         else if (current_train == Train::SILVER && next_train == Train::ORANGE){
             cout << "on the silver line, get off the silver line at East Falls Church and board the orange line.\n";
@@ -373,6 +415,18 @@ class MetroSolver{
                 }
             }
         }
+        else if (final_path[index].name == "Rosslyn" && last_train == Train::BLUE && next_train == Train::SILVERORANGE){
+            if (determine_train(final_path[final_path.size() - 1]) == Train::SILVER){
+                cout << "on the blue line, get off the blue line at Rosslyn and board the silver line.\n";
+            }
+            if (determine_train(final_path[final_path.size() - 1]) == Train::ORANGE){
+                cout << "on the blue line, get off the blue line at Rosslyn and board the orange line.\n";
+            }
+            if (determine_train(final_path[final_path.size() - 1]) == Train::SILVERORANGE){
+                cout << "on the blue line, get off the blue line at Rosslyn and board the silver or orange line.\n";
+            }
+        }
+
 
         else if (current_train == Train::MULTI){
             if (final_path[index].name == "Fort Totten"){
@@ -380,7 +434,8 @@ class MetroSolver{
                     if (final_path[index - 1].name == "West Hyattsville"){
                         cout << "on the yellow/green line, get off the yellow/green line at Fort Totten and board the red line.\n";
                     }
-                    else if (determine_train(final_path[0]) == Train::YELLOW){
+                    else if (determine_train(final_path[0]) == Train::YELLOW
+                    || determine_train(final_path[0]) == Train::BLUEYELLOW){
                         cout << "on the yellow line, get off the yellow line at Fort Totten and board the red line.\n";
                     }
                     else if (determine_train(final_path[0]) == Train::GREEN){
@@ -396,7 +451,11 @@ class MetroSolver{
                         cout << "green line.\n";
                     }
                     else if (determine_train(final_path[final_path.size() -1]) == Train::YELLOW
-                    || determine_train(final_path[final_path.size() -1]) == Train::BLUE){
+                    || determine_train(final_path[final_path.size() -1]) == Train::BLUE
+                    || determine_train(final_path[final_path.size() -1]) == Train::BLUEYELLOW){
+                        cout << "yellow line.\n";
+                    }
+                    else if (check_for_lenfant_pentagon_arlington()){
                         cout << "yellow line.\n";
                     }
                     else{
@@ -448,7 +507,8 @@ class MetroSolver{
                 if (next_train == Train::YELLOWGREEN){
                     cout << "on the red line, get off the red line at Gallery Place and board the ";
                     if (determine_train(final_path[final_path.size() - 1]) == Train::YELLOW
-                    || determine_train(final_path[final_path.size() - 1]) == Train::BLUE){
+                    || determine_train(final_path[final_path.size() - 1]) == Train::BLUE
+                    || check_for_lenfant_pentagon_arlington()){
                         cout << "yellow line.\n";
                     }
                     else if (determine_train(final_path[final_path.size() - 1]) == Train::GREEN){
@@ -572,6 +632,35 @@ class MetroSolver{
                     }
                     else if ((determine_train(final_path[final_path.size() - 1]) == Train::YELLOWGREEN)){
                         cout << "yellow or green line.\n";
+                    }
+                }
+                else if (determine_train(final_path[index- 1]) == Train::YELLOWGREEN){
+                    if (next_train == Train::BLUEYELLOW){
+                        cout << "on the yellow/green line, get off at L'Enfant Plaza and board the ";
+                        if (determine_train(final_path[final_path.size()- 1]) == Train::YELLOW){
+                            cout << "yellow line.\n";
+                        }
+                        else if (determine_train(final_path[final_path.size()- 1]) == Train::BLUE){
+                            cout << "blue line.\n";
+                        }
+                        else {
+                            cout << "blue or yellow line.\n";
+                        }
+                    }
+                    else if (next_train == Train::BLUESILVERORANGE){
+                        cout << "on the blue/silver/orange line, get off at L'Enfant Plaza and board the ";
+                        if (determine_train(final_path[final_path.size()- 1]) == Train::BLUESILVER){
+                            cout << "blue or silver line.\n";
+                        }
+                        else if (determine_train(final_path[final_path.size()- 1]) == Train::SILVER){
+                            cout << "silver line.\n";
+                        }
+                        else if (determine_train(final_path[final_path.size()- 1]) == Train::ORANGE){
+                            cout << "orange line.\n";
+                        }
+                        else if (determine_train(final_path[final_path.size()- 1]) == Train::SILVERORANGE){
+                            cout << "silver or orange line.\n";
+                        }
                     }
                 }
 

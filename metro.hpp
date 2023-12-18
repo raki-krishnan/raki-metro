@@ -461,8 +461,8 @@ class Metro{
         pair<string, int> q26 = make_pair("Farragut West", 2);
         farragut_west.adjacent_stops.push_back(q25);
         mcpherson_square.adjacent_stops.push_back(q26);
-        pair<string, int> mcmetro = make_pair("Metro Center", 2);
-        pair<string, int> mcmetro2 = make_pair("Farragut West", 2);
+        pair<string, int> mcmetro = make_pair("Metro Center", 3);
+        pair<string, int> mcmetro2 = make_pair("FMcPherson Square", 3);
         mcpherson_square.adjacent_stops.push_back(mcmetro);
         metro_center.adjacent_stops.push_back(mcmetro2);
 
