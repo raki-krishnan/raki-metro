@@ -126,9 +126,22 @@ int main(){
         return 0;
     }
 
+
+    MetroSolver dijkstra(starting_station, destination_station, boomin);
+
+    if(!dijkstra.check_starting_location(starting_station)){
+        cout << "The starting point you entered is not valid.";
+        return -1;
+    }
+    if (!dijkstra.check_destination(destination_station)){
+        cout << "The destination you entered is not valid.";
+        return -1;
+    }
+
+
     cout << "Great! Here is the fastest way to get from " 
     << starting_station << " to " << destination_station << ": ";
-    MetroSolver dijkstra(starting_station, destination_station, boomin);
+
     dijkstra.solve();
     dijkstra.print();
 
