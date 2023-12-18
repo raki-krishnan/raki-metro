@@ -789,6 +789,59 @@ class MetroSolver{
         return;
     }
 
+
+    bool check_starting_location(string &word){
+        for (size_t i = 0; i < word.size(); i++){
+            word[i] = static_cast<char>(tolower(word[i]));
+        }
+        word[0] = static_cast<char>(toupper(word[0]));
+        for (size_t i = 0; i < word.size() - 1; i++){
+            if (word[i] == ' '){
+                word[i + 1] = static_cast<char>(toupper(word[i+1]));
+            }
+        }
+        if (word[word.size() -1] == ' '){
+            word.pop_back();
+        }
+        //at this point, the word should be formatted correctly (i.e. "RhOdE ISLAND aVE" --> "Rhode Island Ave")
+        
+        bool valid_stop = false;
+        for (size_t i = 0; i < metro.master_list.size(); ++i){
+            if (word == metro.master_list[i].name){
+                valid_stop = true;
+                break;
+            }
+        }
+
+        starting_point = word;
+        return valid_stop;
+    }
+    bool check_destination(string &word){
+        for (size_t i = 0; i < word.size(); i++){
+            word[i] = static_cast<char>(tolower(word[i]));
+        }
+        word[0] = static_cast<char>(toupper(word[0]));
+        for (size_t i = 0; i < word.size() - 1; i++){
+            if (word[i] == ' '){
+                word[i + 1] = static_cast<char>(toupper(word[i+1]));
+            }
+        }
+        if (word[word.size() -1] == ' '){
+            word.pop_back();
+        }
+        //at this point, the word should be formatted correctly (i.e. "RhOdE ISLAND aVE" --> "Rhode Island Ave")
+        
+        bool valid_stop = false;
+        for (size_t i = 0; i < metro.master_list.size(); ++i){
+            if (word == metro.master_list[i].name){
+                valid_stop = true;
+                break;
+            }
+        }
+
+        destination = word;
+        return valid_stop;
+    }
     string starting_point;
     string destination;
     Metro metro;
