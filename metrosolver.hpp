@@ -290,6 +290,24 @@ class MetroSolver{
     }
 
     bool check_if_stay_on_merger(Train current_train, Train next_train, Train last_train, size_t index){
+        if (current_train == Train::GREEN || current_train == Train::SILVER || current_train == Train::RED
+        || current_train == Train::BLUE || current_train == Train::ORANGE || current_train == Train::YELLOW){
+            return true;
+            //if we are on a solid color, there is no chance of switching
+        }
+        if (current_train == Train::BLUESILVERORANGE && final_path[index - 1].name == "Minnesota Ave" && next_train == Train::BLUESILVERORANGE){
+            return true;
+        }
+        if (current_train == Train::BLUESILVERORANGE && final_path[index - 1].name == "Minnesota Ave" && next_train == Train::BLUESILVER){
+            return false;
+        }
+        if (current_train == Train::BLUESILVERORANGE && final_path[index - 1].name == "Benning Road" && next_train == Train::ORANGE){
+            return false;
+        }
+        if (current_train == Train::BLUESILVERORANGE && final_path[index - 1].name == "Benning Road" && next_train == Train::BLUESILVERORANGE){
+            return true;
+        }
+
         if ( ((current_train == Train::GREEN || current_train == Train::YELLOW) && next_train == Train::YELLOWGREEN)//yellowgreen checks
             || (current_train == Train::YELLOWGREEN && (next_train == Train::YELLOW || next_train == Train::GREEN)) 
             || (current_train == Train::BLUESILVER && (next_train == Train::BLUE || next_train == Train::SILVER)) //bluesilver checks
@@ -299,11 +317,14 @@ class MetroSolver{
             && final_path[index + 1].name != "Arlington Cemetary" && final_path[index].name != "King Street") 
             || ((current_train == Train::SILVER || current_train == Train::ORANGE) && next_train == Train::SILVERORANGE) //silverorange checks
             || (current_train == Train::SILVERORANGE && (next_train == Train::SILVER || next_train == Train::ORANGE))
-            || ((current_train == Train::SILVER || current_train == Train::ORANGE || current_train == Train::BLUE || current_train == Train::BLUESILVER) 
-            && next_train == Train::BLUESILVERORANGE) //bluesilverorange checks
-            || ((next_train == Train::SILVER || next_train == Train::ORANGE || next_train == Train::BLUE || next_train == Train::BLUESILVER) 
-            && current_train == Train::BLUESILVERORANGE)
+            ||  (current_train == Train::BLUESILVERORANGE && final_path[index - 1].name != "Minnesota Ave" && final_path[index - 1].name != "Benning Road" 
+            && (next_train == Train::SILVER || next_train == Train::ORANGE || next_train == Train::BLUE || next_train == Train::BLUESILVER) 
+            ) //bluesilverorange checks
+            
         ){
+            return true;
+        }
+        if (current_train == Train::BLUESILVERORANGE && final_path[index - 1].name == "Potomac Ave"){
             return true;
         }
         if (final_path[index].name == "King Street"){
@@ -463,6 +484,14 @@ class MetroSolver{
                 }
             }
             
+        }
+        else if (final_path[index].name == "Stadium-Armory" && final_path[index - 1].name == "Minnesota Ave" 
+        && final_path[index + 1].name == "Benning Road"){
+            cout << "on the orange line, get off the orange line at Stadium-Armory and board the blue or silver line.\n";
+        }
+        else if (final_path[index].name == "Stadium-Armory" && final_path[index + 1].name == "Minnesota Ave" 
+        && final_path[index - 1].name == "Benning Road"){
+            cout << "on the blue/silver line, get off at Stadium-Armory and board the orange line.\n";
         }
 
 
@@ -714,7 +743,6 @@ class MetroSolver{
         cout << "\n//////////////INSTRUCTIONS//////////////\n\n";
         print_opening_statement();
         int same_train_counter = 1;
-        bool switched_trains = false;
 
         for (size_t i = 1; i < final_path.size() - 1; ++i){
             Train current_train = determine_train (final_path[i]);
@@ -727,10 +755,15 @@ class MetroSolver{
                     same_train_counter++;
                 }
                 else {
-                    cout << "After " << same_train_counter << " stops ";
+                    if (same_train_counter > 1){
+                        cout << "After " << same_train_counter << " stops ";
+                    }
+                    else {
+                        cout << "After " << same_train_counter << " stop ";
+                    }
+                    
                     print_switch_message(current_train, next_train, last_train, i);
                     same_train_counter = 1;
-                    switched_trains = true;
                 }
 
             }
@@ -739,22 +772,13 @@ class MetroSolver{
             }
         }
 
-        if (!switched_trains){
-            if (same_train_counter > 1){
-                cout << "After " << same_train_counter << " stops, you will arrive at " << destination << "!\n";
-            }
-            else {
-                cout << "After " << same_train_counter << " stop, you will arrive at " << destination << "!\n";
-            }
+
+        if (same_train_counter > 1){
+            cout << "After " << same_train_counter << " stops, you will arrive at " << destination << "!\n";
         }
         else {
-            if (same_train_counter > 1){
-                cout << "After " << same_train_counter << " stops, you will arrive at " << destination << "!\n";
-            }
-            else {
-                cout << "After " << same_train_counter << " stop, you will arrive at " << destination << "!\n";
-            }       
-        }
+            cout << "After " << same_train_counter << " stop, you will arrive at " << destination << "!\n";
+        }       
         
         cout << "This journey will take approximately " << final_time << " minutes.\n";
         cout << "Have a safe trip!\n";
