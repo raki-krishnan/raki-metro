@@ -16,7 +16,13 @@ class MetroSolver{
         size_t curV = 0;
         priority_queue<Stop, vector<Stop>, StopComp> pQ;
         Stop current;
-        int counter = 0;
+        //int counter = 0;
+
+        //check if we are given the same destination and starting point
+        if (starting_point == destination){
+            final_path.push_back(metro.stop_map[starting_point]);
+            return;
+        }
 
         for (size_t count = 0; count < metro.master_list.size(); count++){
             min_distance = 9000000;
@@ -50,8 +56,8 @@ class MetroSolver{
                 }
             }
 
-            cout << counter << "\n";
-            counter++;
+            // cout << counter << "\n";
+            // counter++;
 
         }//end of outside for loop
 
@@ -275,6 +281,26 @@ class MetroSolver{
             return true;
         }
 
+        if (current_train == Train::RED || current_train == Train::BLUE || current_train == Train::SILVER
+        || current_train == Train:: ORANGE || current_train == Train::GREEN || current_train == Train::YELLOW){
+            //there is no situation where we will perform a train switch when we are on a singular color
+            return true;
+        }
+
+        if (current_train == Train::YELLOWGREEN){
+            if (last_train == Train::MULTI){
+                return true;
+            }
+        }
+        if (current_train == Train::BLUESILVERORANGE){
+            if (last_train == Train::BLUESILVER){
+                return true;
+            }
+            if (last_train == Train::MULTI){
+                return true;
+            }
+        }
+
         //check MULTIS
         if (current_train == Train::MULTI){
             if (final_path[index].name == "L'Enfant Plaza"){
@@ -304,6 +330,9 @@ class MetroSolver{
                 if (next_train == Train::YELLOWGREEN && last_train == Train:: YELLOWGREEN){
                     return true;
                 }
+                // if(last_train == Train::MULTI && next_train == Train::YELLOWGREEN){
+                //     return false;
+                // }
                 if ((next_train == Train::RED && last_train == Train:: MULTI ) 
                 || (last_train == Train::RED && next_train == Train:: MULTI)){
                     return true;
@@ -410,6 +439,9 @@ class MetroSolver{
                     else if (determine_train(final_path[index - 5]) == Train::BLUE){
                         cout << "on the blue line, get off the blue line at Metro Center and board the red line.\n";
                     }
+                    else if (next_train == Train::RED || next_train == Train::MULTI){
+                        cout << "on the blue/orange/silver line, get off at Metro Center and board the red line.\n";
+                    }
                 }
             }//if metro center
             else if (final_path[index].name == "Gallery Place"){
@@ -459,11 +491,41 @@ class MetroSolver{
                     if (next_train == Train::GREEN){
                         cout << "on the yellow line, get off the yellow line at L'Enfant Plaza and board the green line.\n";
                     }  
+                    else if (next_train == Train:: BLUESILVERORANGE){
+                        cout << "on the green line, get off the green line at L'Enfant Plaza and board the ";
+                        if (determine_train(final_path[final_path.size() - 1]) == Train:: BLUESILVER){
+                            cout << "blue or silver line.\n";
+                        }
+                        else if (determine_train(final_path[final_path.size() - 1]) == Train:: ORANGE){
+                            cout << "orange line.\n";
+                        }
+                        else if (determine_train(final_path[final_path.size() - 1]) == Train:: SILVER){
+                            cout << "silver line.\n";
+                        }
+                        else {
+                            cout << "blue, silver, or orange line.\n";
+                        }
+                    }  
                 }
                 else if (determine_train(final_path[0]) == Train::GREEN){
                     if (next_train == Train::YELLOW){
                         cout << "on the green line, get off the green line at L'Enfant Plaza and board the yellow line.\n";
-                    }  
+                    }
+                    else if (next_train == Train:: BLUESILVERORANGE){
+                        cout << "on the green line, get off the green line at L'Enfant Plaza and board the ";
+                        if (determine_train(final_path[final_path.size() - 1]) == Train:: BLUESILVER){
+                            cout << "blue or silver line.\n";
+                        }
+                        else if (determine_train(final_path[final_path.size() - 1]) == Train:: ORANGE){
+                            cout << "orange line.\n";
+                        }
+                        else if (determine_train(final_path[final_path.size() - 1]) == Train:: SILVER){
+                            cout << "silver line.\n";
+                        }
+                        else {
+                            cout << "blue, silver, or orange line.\n";
+                        }
+                    }
                 }
                 else if (determine_train(final_path[0]) == Train::BLUESILVERORANGE){
                     if (next_train == Train::BLUEYELLOW){
@@ -471,6 +533,10 @@ class MetroSolver{
                     }
                     else if (next_train == Train::GREEN){
                         cout << "on the blue/silver/orange line, get off the blue/silver/orange line at L'Enfant Plaza and board the green line.\n";
+                    }
+                    else if (next_train == Train::YELLOWGREEN){
+                        cout << "on the blue/silver/orange line, get off the blue/silver/orange line at L'Enfant Plaza and board the yellow or green line.\n";
+
                     }  
                 }
                 else if (determine_train(final_path[0]) == Train::BLUESILVER){
@@ -479,6 +545,9 @@ class MetroSolver{
                     }
                     else if (next_train == Train::GREEN){
                         cout << "on the blue/silver line, get off the blue/silver line at L'Enfant Plaza and board the green line.\n";
+                    }
+                    else if (next_train == Train::YELLOWGREEN){
+                        cout << "on the blue/silver line, get off the blue/silver line at L'Enfant Plaza and board the yellow or green line.\n";
                     }  
                 }
                 else if (determine_train(final_path[0]) == Train::YELLOWGREEN){
@@ -492,6 +561,19 @@ class MetroSolver{
                         cout << "on the yellow/green line, get off the yellow/green line at L'Enfant Plaza and board the blue or silver line.\n";
                     }
                 }
+                else if (determine_train(final_path[index- 1]) == Train::BLUESILVERORANGE){
+                    cout << "on the blue/silver/orange line, get off at L'Enfant Plaza and board the ";
+                    if (determine_train(final_path[final_path.size() - 1]) == Train::GREEN){
+                        cout << "green line.\n";
+                    }
+                    else if ((determine_train(final_path[final_path.size() - 1]) == Train::YELLOW)
+                    || (determine_train(final_path[final_path.size() - 1]) == Train::BLUE)){
+                        cout << "yellow line.\n";
+                    }
+                    else if ((determine_train(final_path[final_path.size() - 1]) == Train::YELLOWGREEN)){
+                        cout << "yellow or green line.\n";
+                    }
+                }
 
             }//if L'Enfant Plaza
             
@@ -500,33 +582,53 @@ class MetroSolver{
     }
 
     void print(){
-        
+        cout << "\n//////////////INSTRUCTIONS//////////////\n\n";
         print_opening_statement();
-        int same_train_counter = 0;
+        int same_train_counter = 1;
+        bool switched_trains = false;
 
         for (size_t i = 1; i < final_path.size() - 1; ++i){
-            cout << "Next, ";
             Train current_train = determine_train (final_path[i]);
             Train last_train = determine_train (final_path[i - 1]);
             Train next_train =  determine_train (final_path[i + 1]);
-            if (current_train != last_train){
+            if (current_train != last_train || (current_train == Train::MULTI && last_train == Train::MULTI)){
                 if(check_if_stay_on_merger(current_train, next_train, last_train, i)){
                     //if this returns true, we actually stay on our current train
                     same_train_counter++;
                 }
                 else {
-                    cout << " after " << same_train_counter << " stops ";
+                    cout << "After " << same_train_counter << " stops ";
                     print_switch_message(current_train, next_train, last_train, i);
-                    same_train_counter = 0;
-                    
+                    same_train_counter = 1;
+                    switched_trains = true;
                 }
 
             }
-
+            else {
+                same_train_counter += 1;
+            }
         }
-        cout << "You have arrived at " << destination << "!\n";
-        cout << "This journey will take approximately = " << final_time << "minutes.\n";
-        cout << "Have a safe trip!";
+
+        if (!switched_trains){
+            if (same_train_counter > 1){
+                cout << "After " << same_train_counter << " stops, you will arrive at " << destination << "!\n";
+            }
+            else {
+                cout << "After " << same_train_counter << " stop, you will arrive at " << destination << "!\n";
+            }
+        }
+        else {
+            if (same_train_counter > 1){
+                cout << "After " << same_train_counter << " stops, you will arrive at " << destination << "!\n";
+            }
+            else {
+                cout << "After " << same_train_counter << " stop, you will arrive at " << destination << "!\n";
+            }       
+        }
+        
+        cout << "This journey will take approximately " << final_time << " minutes.\n";
+        cout << "Have a safe trip!\n";
+        cout << "\n////////////////////////////////////////\n\n";
         return;
     }
 

@@ -86,40 +86,40 @@ class Metro{
         //North Bethesda
         vector<pair<string, int> > north_bethesda_adjacents;
         Stop north_bethesda("North Bethesda", size_t(3), north_bethesda_adjacents);
-        pair<string, int> p5 = make_pair("North Bethesda", 2);
-        pair<string, int> p6 = make_pair("Twinbrook", 2);
+        pair<string, int> p5 = make_pair("North Bethesda", 3);
+        pair<string, int> p6 = make_pair("Twinbrook", 3);
         twinbrook.adjacent_stops.push_back(p5);
         north_bethesda.adjacent_stops.push_back(p6);
 
         //Grovesnor
         vector<pair<string, int> > grovesnor_adjacents;
         Stop grovesnor("Grovesnor", size_t(4), grovesnor_adjacents);
-        pair<string, int> p7 = make_pair("Grovesnor", 2);
-        pair<string, int> p8 = make_pair("North Bethesda", 2);
+        pair<string, int> p7 = make_pair("Grovesnor", 3);
+        pair<string, int> p8 = make_pair("North Bethesda", 3);
         north_bethesda.adjacent_stops.push_back(p7);
         grovesnor.adjacent_stops.push_back(p8);
 
         //Medical Center
         vector<pair<string, int> > medical_center_adjacents;
         Stop medical_center("Medical Center", size_t(5), medical_center_adjacents);
-        pair<string, int> p88 = make_pair("Grovesnor", 2);
-        pair<string, int> p9 = make_pair("Medical Center", 2);
+        pair<string, int> p88 = make_pair("Grovesnor", 3);
+        pair<string, int> p9 = make_pair("Medical Center", 3);
         medical_center.adjacent_stops.push_back(p88);
         grovesnor.adjacent_stops.push_back(p9);
 
         //Bethesda
         vector<pair<string, int> > bethesda_adjacents;
         Stop bethesda("Bethesda", size_t(6), bethesda_adjacents);
-        pair<string, int> p10 = make_pair("Bethesda", 2);
-        pair<string, int> p11 = make_pair("Medical Center", 2);
+        pair<string, int> p10 = make_pair("Bethesda", 3);
+        pair<string, int> p11 = make_pair("Medical Center", 3);
         medical_center.adjacent_stops.push_back(p10);
         bethesda.adjacent_stops.push_back(p11);
 
         //Friendship Heights
         vector<pair<string, int> > friendship_heights_adjacents;
         Stop friendship_heights("Friendship Heights", size_t(7), friendship_heights_adjacents);
-        pair<string, int> p111 = make_pair("Bethesda", 2);
-        pair<string, int> p12 = make_pair("Friendship Heights", 2);
+        pair<string, int> p111 = make_pair("Bethesda", 3);
+        pair<string, int> p12 = make_pair("Friendship Heights", 3);
         friendship_heights.adjacent_stops.push_back(p111);
         bethesda.adjacent_stops.push_back(p12);
 

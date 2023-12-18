@@ -109,7 +109,7 @@ int main(){
     boomin.declare_stops();
     string destination_station;
     string starting_station;
-    pretty_print(boomin);
+    //pretty_print(boomin);
     cout << "Welcome! If you're travelling on the DC Metro, you have come to the right place.\n";
     cout << "We will tell you how to get to your destination in the quickest way possible.\n";
     cout << "To start, please enter the metro station that you are starting at: ";
@@ -121,13 +121,16 @@ int main(){
     getline(cin, destination_station);
 
     if (starting_station == destination_station){
-        cout << "That was a pretty silly thing to enter!";
+        cout << "That was a pretty silly thing to enter!\n";
+        cout << "Next time, try entering a different starting and ending location.";
+        return 0;
     }
 
     cout << "Great! Here is the fastest way to get from " 
     << starting_station << " to " << destination_station << ": ";
     MetroSolver dijkstra(starting_station, destination_station, boomin);
     dijkstra.solve();
+    dijkstra.print();
 
     return 0;
 }
