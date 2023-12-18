@@ -129,7 +129,8 @@ class MetroSolver{
         }
         else if (train == Train::YELLOWGREEN){
             if (determine_train(final_path[final_path.size() - 1]) == Train::BLUE
-            || determine_train(final_path[final_path.size() - 1]) == Train::YELLOW){
+            || determine_train(final_path[final_path.size() - 1]) == Train::YELLOW
+            || check_for_lenfant_pentagon_arlington()){
                 cout << "the yellow line ";
             }
             else if (determine_train(final_path[final_path.size() - 1]) == Train::GREEN){
@@ -618,7 +619,8 @@ class MetroSolver{
                     }  
                 }
                 else if (determine_train(final_path[0]) == Train::YELLOW
-                || determine_train(final_path[0]) == Train::BLUE){
+                || determine_train(final_path[0]) == Train::BLUE
+                || determine_train(final_path[0]) == Train::BLUEYELLOW){
                     if (next_train == Train::GREEN){
                         cout << "on the yellow line, get off the yellow line at L'Enfant Plaza and board the green line.\n";
                     }  
@@ -659,7 +661,8 @@ class MetroSolver{
                         }
                     }
                 }
-                else if (determine_train(final_path[0]) == Train::BLUESILVERORANGE){
+                else if (determine_train(final_path[0]) == Train::BLUESILVERORANGE
+                || last_train == Train::BLUESILVERORANGE){
                     if (next_train == Train::BLUEYELLOW){
                         cout << "on the blue/silver/orange line, get off the blue/silver/orange line at L'Enfant Plaza and board the yellow line.\n";
                     }
@@ -789,15 +792,140 @@ class MetroSolver{
         return;
     }
 
+    void convert_common_mistakes(string &word, bool &mistake_occured){
+        if (word == "Georgia Ave" || word == "Georgia Ave Petworth" 
+        || word == "Georgia Ave-petworth" || word == "Georgia Avenue"){
+            word = "Georgia Ave-Petworth";
+            mistake_occured = true;
+        }
+        else if (word == "Rhode Island Avenue" || word == "Rhode-Island Avenue"){
+            word = "Rhode Island Ave";
+            mistake_occured = true;
+        }
+        else if (word == "Benning Rd" || word == "Benning"){
+            word = "Benning Road";
+            mistake_occured = true;
+        }
+        else if (word == "King St"){
+            word = "King Street";
+            mistake_occured = true;
+        }
+        else if (word == "Eisenhower Avenue" || word == "Eisenhower"){
+            word = "Eisenhower Ave";
+            mistake_occured = true;
+        }
+        else if (word == "Ronald Reagan" || word == "Ronald Reagan National Airport"
+        || word == "Dca Airport" || word == "Dca" || word == "Airport"){
+            word = "DCA";
+            mistake_occured = true;
+        }
+        else if (word == "Franconia-Springfield" || word == "Springfield"){
+            word = "Franconia";
+            mistake_occured = true;
+        }
+        else if (word == "Lenfant Plaza" || word == "Lenfant" || word == "L'Enfant"){
+            word = "L'Enfant Plaza";
+            mistake_occured = true;
+        }
+        else if (word == "Braddock Rd" || word == "Braddock"){
+            word = "Braddock Road";
+            mistake_occured = true;
+        }
+        else if (word == "Weihle-Reston East" || word == "Wieihle" || word == "Wiehle"
+        || word == "Reston East" || word == "Reston"){
+            word = "Wiehle-Reston East";
+            mistake_occured = true;
+        }
+        else if (word == "Mclean" || word == "Mclane"){
+            word = "McLean";
+            mistake_occured = true;
+        }
+        else if (word == "Virginia Sq"){
+            word = "Virginia Square";
+            mistake_occured = true;
+        }
+        else if (word == "Ballston-Mu"){
+            word = "Ballston";
+            mistake_occured = true;
+        }
+        else if (word == "Courthouse"){
+            word = "Court House";
+            mistake_occured = true;
+        }
+        else if (word == "Mcpherson square" || word == "Mcpherson sq" || word == "Mcpherson"){
+            word = "McPherson Square";
+            mistake_occured = true;
+        }
+        else if (word == "Grovesnor-Strathmore"){
+            word = "Grovesnor";
+            mistake_occured = true;
+        }
+        else if (word == "Shaw" || word == "Shaw Howard U" || word == "Howard U" 
+        || word == "Howard University" || word == "Shaw Howard" || word == "Shaw-Howard"){
+            word = "Shaw-Howard U";
+            mistake_occured = true;
+        }
+        else if (word == "Mt Vernon" || word == "Mt Vernon Sq"
+        || word == "Mt Vernon Square" || word == "Mount Vernon Sq"){
+            word = "Mount Vernon Square";
+            mistake_occured = true;
+        }
+        else if (word == "U" || word == "U St"){
+            word = "U Street";
+            mistake_occured = true;
+        }
+        else if (word == "Navy Yard Ballpark" || word == "Navy Yd" || word == "Navy Yard-Ballpark"){
+            word = "Navy Yard";
+            mistake_occured = true;
+        }
+        else if (word == "Southern Avenue" || word == "Southern"){
+            word = "Southern Ave";
+            mistake_occured = true;
+        }
+        else if (word == "Naylor Rd" || word == "Naylor"){
+            word = "Naylor Road";
+            mistake_occured = true;
+        }
+        else if (word == "Branch Avenue" || word == "Branch"){
+            word = "Branch Ave";
+            mistake_occured = true;
+        }
+        else if (word == "Potomac Avenue" || word == "Potomac"){
+            word = "Potomac Ave";
+            mistake_occured = true;
+        }
+        else if (word == "Minnesota Avenue" || word == "Minnesota"){
+            word = "Minnesota Ave";
+            mistake_occured = true;
+        }
+        else if (word == "Addison Rd" || word == "Addison"){
+            word = "Addison Road";
+            mistake_occured = true;
+        }
+        else if (word == "Morgan Boulevard" || word == "Morgan"){
+            word = "Morgan Blvd";
+            mistake_occured = true;
+        }
+        else if (word == "Stadium Armory" || word == "Stadium"){
+            word = "Stadium-Armory";
+            mistake_occured = true;
+        }
+    }
+
 
     bool check_starting_location(string &word){
         for (size_t i = 0; i < word.size(); i++){
-            word[i] = static_cast<char>(tolower(word[i]));
+            if (isalpha(word[i])){
+                word[i] = static_cast<char>(tolower(word[i]));
+            } 
         }
         word[0] = static_cast<char>(toupper(word[0]));
         for (size_t i = 0; i < word.size() - 1; i++){
-            if (word[i] == ' '){
-                word[i + 1] = static_cast<char>(toupper(word[i+1]));
+            if (word[i] == ' ' || word[i] == '-'){
+                if (isalpha(word[i+1])){
+                    word[i + 1] = static_cast<char>(toupper(word[i+1]));
+                }
+                
             }
         }
         if (word[word.size() -1] == ' '){
@@ -813,17 +941,27 @@ class MetroSolver{
             }
         }
 
+        bool mistake_occured = false;
+        convert_common_mistakes(word, mistake_occured);
+        if (mistake_occured){
+            valid_stop = true;
+        }
         starting_point = word;
         return valid_stop;
     }
     bool check_destination(string &word){
         for (size_t i = 0; i < word.size(); i++){
-            word[i] = static_cast<char>(tolower(word[i]));
+            if (isalpha(word[i])){
+                word[i] = static_cast<char>(tolower(word[i]));
+            } 
         }
         word[0] = static_cast<char>(toupper(word[0]));
         for (size_t i = 0; i < word.size() - 1; i++){
-            if (word[i] == ' '){
-                word[i + 1] = static_cast<char>(toupper(word[i+1]));
+            if (word[i] == ' ' || word[i] == '-'){
+                if (isalpha(word[i+1])){
+                    word[i + 1] = static_cast<char>(toupper(word[i+1]));
+                }
+                
             }
         }
         if (word[word.size() -1] == ' '){
@@ -838,7 +976,11 @@ class MetroSolver{
                 break;
             }
         }
-
+        bool mistake_occured = false;
+        convert_common_mistakes(word, mistake_occured);
+        if (mistake_occured){
+            valid_stop = true;
+        }
         destination = word;
         return valid_stop;
     }
