@@ -558,13 +558,16 @@ class MetroSolver{
                     else if (determine_train(final_path[final_path.size() -1]) == Train::SILVER){
                         cout << "silver line.\n";
                     }
+                    else if (determine_train(final_path[final_path.size() -1]) == Train::BLUESILVERORANGE){
+                        cout << "blue, silver, or orange line.\n";
+                    }
                     else if (determine_train(final_path[final_path.size() -1]) == Train::SILVERORANGE){
                         cout << "orange or silver line.\n";
                     }
                     else if (determine_train(final_path[final_path.size() -1]) == Train::BLUESILVER){
                         cout << "blue or silver line.\n";
                     }
-                    else {
+                    else { //last stop is on blue/orange/silver
                         cout << "blue, orange, or silver line.\n";
                     }
                 }
@@ -943,6 +946,16 @@ class MetroSolver{
         }
         else if (word == "Stadium Armory" || word == "Stadium"){
             word = "Stadium-Armory";
+            mistake_occured = true;
+        }
+        else if (word == "Iad" || word == "Dulles" || word == "Dulles Airport"
+        || word == "Washington Dulles International Airport"){
+            word = "IAD";
+            mistake_occured = true;
+        }
+        else if (word == "University of Maryland" || word == "UMD" || word == "College-Park"
+        || word == "University of Maryland College-Park" || word == "Univeristy of Maryland College Park"){
+            word = "College Park";
             mistake_occured = true;
         }
     }
