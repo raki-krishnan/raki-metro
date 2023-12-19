@@ -733,6 +733,9 @@ class MetroSolver{
                     else if (determine_train(final_path[final_path.size() - 1]) == Train::BLUESILVER){
                         cout << "on the yellow/green line, get off the yellow/green line at L'Enfant Plaza and board the blue or silver line.\n";
                     }
+                    else if (determine_train(final_path[final_path.size() - 1]) == Train::BLUESILVERORANGE){
+                        cout << "on the yellow/green line, get off the yellow/green line at L'Enfant Plaza and board the blue, orange, or silver line.\n";
+                    }
                 }
                 else if (determine_train(final_path[index- 1]) == Train::BLUESILVERORANGE){
                     cout << "on the blue/silver/orange line, get off at L'Enfant Plaza and board the ";
