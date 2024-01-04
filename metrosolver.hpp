@@ -116,16 +116,7 @@ class MetroSolver{
             cout << "the silver line ";
         }
         else if (train == Train::BLUESILVER){
-            if (determine_train(final_path[final_path.size() - 1]) == Train::BLUE){
-                cout << "the blue line ";
-            }
-            else if (determine_train(final_path[final_path.size() - 1]) == Train::SILVER
-            || determine_train(final_path[final_path.size() - 1]) == Train::ORANGE){
-                 cout << "the silver line ";
-            }
-            else {
-                cout << "either the blue or silver line ";
-            }
+            cout << "either the blue or silver line ";
         }
         else if (train == Train::YELLOWGREEN){
             if (determine_train(final_path[final_path.size() - 1]) == Train::BLUE
@@ -358,6 +349,9 @@ class MetroSolver{
                 return true;
             }
             else if (last_train == Train::SILVER && next_train == Train::SILVERORANGE){
+                return true;
+            }
+            else if (next_train == Train::SILVERORANGE){
                 return true;
             }
         }
@@ -740,7 +734,7 @@ class MetroSolver{
                     }
                 } 
                 else if (determine_train(final_path[0]) == Train::BLUESILVERORANGE
-                || last_train == Train::BLUESILVERORANGE){
+                || (last_train == Train::BLUESILVERORANGE && determine_train(final_path[0]) != Train::BLUESILVER)){
                     if (next_train == Train::BLUEYELLOW){
                         cout << "on the blue/silver/orange line, get off the blue/silver/orange line at L'Enfant Plaza and board the yellow line.\n";
                     }
@@ -933,7 +927,8 @@ class MetroSolver{
             word = "Court House";
             mistake_occured = true;
         }
-        else if (word == "Mcpherson square" || word == "Mcpherson sq" || word == "Mcpherson"){
+        else if (word == "Mcpherson square" || word == "Mcpherson" 
+        || word == "Mcpherson Square" || word == "Mcpherson Sq"){
             word = "McPherson Square";
             mistake_occured = true;
         }
@@ -1041,6 +1036,12 @@ class MetroSolver{
         return valid_stop;
     }
     bool check_destination(string &word){
+        for (size_t i = 0; i < metro.master_list.size(); ++i){
+            if (word == metro.master_list[i].name){
+                return true;
+            }
+        }
+
         for (size_t i = 0; i < word.size(); i++){
             if (isalpha(word[i])){
                 word[i] = static_cast<char>(tolower(word[i]));

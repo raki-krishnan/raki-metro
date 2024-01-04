@@ -50,10 +50,10 @@ enum class Train{
     SILVER = 5,
     BLUEYELLOW = 6,
     BLUESILVER = 7,
-    BLUESILVERORANGE = 9,
-    SILVERORANGE = 10,
-    YELLOWGREEN = 11,
-    MULTI = 12
+    BLUESILVERORANGE = 8,
+    SILVERORANGE = 9,
+    YELLOWGREEN = 10,
+    MULTI = 11
 };
 
 class Metro{
