@@ -314,6 +314,12 @@ class MetroSolver{
             return true;
         }
         if (final_path[index].name == "Rosslyn"){
+            if (last_train == Train::BLUE && next_train == Train::SILVERORANGE){
+                return false;
+            }
+            if (last_train == Train::SILVERORANGE && next_train == Train::BLUE){
+                return false;
+            }
             if (metro.train_map[final_path[0].name] == Train::ORANGE
             || metro.train_map[final_path[0].name] == Train::SILVER
             || metro.train_map[final_path[0].name] == Train::SILVERORANGE){
@@ -651,7 +657,8 @@ class MetroSolver{
                 }
             }//if gallery place
             else if (final_path[index].name == "L'Enfant Plaza"){
-                if (determine_train(final_path[0]) == Train::ORANGE){
+                if (determine_train(final_path[0]) == Train::ORANGE
+                && final_path[0].name != "Vienna" && final_path[0].name != "Dunn Loring" && final_path[0].name != "West Falls Church"){
                     if (next_train == Train::BLUEYELLOW){
                         cout << "on the orange line, get off the orange line at L'Enfant Plaza and board the yellow line.\n";
                     }
@@ -811,6 +818,42 @@ class MetroSolver{
                         else if (determine_train(final_path[final_path.size()- 1]) == Train::SILVERORANGE){
                             cout << "silver or orange line.\n";
                         }
+                    }
+                }
+                else if (determine_train(final_path[final_path.size()- 1]) == Train::ORANGE){
+                    cout << "on the ";
+                    if (last_train == Train::YELLOWGREEN){
+                        cout << "yellow/green line, get off the yellow/green line at L'Enfant Plaza and board the orange line.\n";
+                    }
+                    else if (last_train == Train::YELLOW){
+                        cout << "yellow line, get off the yellow line at L'Enfant Plaza and board the orange line.\n";
+                    }
+                    else if (last_train == Train::GREEN){
+                        cout << "green line, get off the green line at L'Enfant Plaza and board the orange line.\n";
+                    }
+                }
+                else if (determine_train(final_path[final_path.size()- 1]) == Train::BLUESILVER){
+                    cout << "on the ";
+                    if (last_train == Train::YELLOWGREEN){
+                        cout << "yellow/green line, get off the yellow/green line at L'Enfant Plaza and board the blue/silver line.\n";
+                    }
+                    else if (last_train == Train::YELLOW){
+                        cout << "yellow line, get off the yellow line at L'Enfant Plaza and board the blue/silver line.\n";
+                    }
+                    else if (last_train == Train::GREEN){
+                        cout << "green line, get off the green line at L'Enfant Plaza and board the blue/silver line.\n";
+                    }
+                }
+                else if (determine_train(final_path[final_path.size()- 1]) == Train::BLUESILVERORANGE){
+                    cout << "on the ";
+                    if (last_train == Train::YELLOWGREEN){
+                        cout << "yellow/green line, get off the yellow/green line at L'Enfant Plaza and board the blue/silver/orange line.\n";
+                    }
+                    else if (last_train == Train::YELLOW){
+                        cout << "yellow line, get off the yellow line at L'Enfant Plaza and board the blue/silver/orange line.\n";
+                    }
+                    else if (last_train == Train::GREEN){
+                        cout << "green line, get off the green line at L'Enfant Plaza and board the blue/silver/orange line.\n";
                     }
                 }
 
