@@ -20,6 +20,7 @@ Enter the names of the start and end metro stops when prompted. The application 
 ## Contributing
 Contributions to the Metro Route Finder are welcome! If you have suggestions or improvements, please feel free to fork the repository and create a pull request.
 
+##License
 This project is a personal endeavor by Rakesh Krishnan. For any inquiries, feel free to contact me at raki@umich.edu .
 
 
