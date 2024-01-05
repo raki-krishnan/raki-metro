@@ -368,10 +368,27 @@ class MetroSolver{
         if (final_path[index].name == "King Street"){
             if (index >= 7 && final_path.size() >= 8){
                 if (final_path[index - 7].name == "Arlington Cemetary" && next_train == Train::YELLOW){
+
                     return false;
                 }
-                else if (final_path[index - 7].name == "L'Enfant Plaza" && next_train == Train::BLUE){
+                if (final_path[index - 7].name == "L'Enfant Plaza" && next_train == Train::BLUE){
                     return false;
+                }
+                if (final_path[index - 7].name == "L'Enfant Plaza" && determine_train(final_path[0]) == Train::YELLOWGREEN){
+                    return true;
+                }
+                if (index >= 8 && final_path.size() >= 9 && final_path[index - 8].name == "Archives"){
+                    return true;
+                }
+            }
+            else if (last_train == Train::YELLOW){
+                if (final_path.size() >= (index + 7) && final_path[index + 7].name == "L'Enfant Plaza"){
+                    return true;
+                }
+            }
+            else if (last_train == Train:: BLUE){
+                if (final_path.size() >= (index + 7) && final_path[index + 7].name == "Arlington Cemetary"){
+                    return true;
                 }
             }
             else if (index + 7 <= final_path.size() ){
@@ -382,6 +399,7 @@ class MetroSolver{
                     return false;
                 }
             }
+
         }
 
         if (current_train == Train::RED || current_train == Train::BLUE || current_train == Train::SILVER
